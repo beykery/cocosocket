@@ -1,4 +1,4 @@
-package org.cocosocket.util;
+package org.ngame.socket.util;
 
 /**
  * <p>Encodes and decodes to and from Base64 notation.</p> <p>Homepage: <a

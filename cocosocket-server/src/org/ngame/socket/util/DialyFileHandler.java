@@ -1,7 +1,7 @@
 /**
  * 每天生产一个日志文件
  */
-package org.cocosocket.util;
+package org.ngame.socket.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

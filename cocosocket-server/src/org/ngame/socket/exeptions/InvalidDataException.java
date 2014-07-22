@@ -1,4 +1,4 @@
-package org.cocosocket.exeptions;
+package org.ngame.socket.exeptions;
 
 /**
  * 数据非法

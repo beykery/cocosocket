@@ -1,4 +1,4 @@
-package org.cocosocket;
+package org.ngame.socket;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.timeout.IdleStateEvent;
@@ -18,15 +18,15 @@ public abstract class SocketListener
     int max_connection = 10000;
     AtomicInteger cur_connection = new AtomicInteger(0);
 
-    public abstract void onOpen(CocoSocket conn);
+    public abstract void onOpen(NSocket conn);
 
-    public abstract void onClose(CocoSocket conn, boolean local);
+    public abstract void onClose(NSocket conn, boolean local);
 
-    public abstract void onMessage(CocoSocket conn, ByteBuf message);
+    public abstract void onMessage(NSocket conn, ByteBuf message);
 
-    public abstract void onError(CocoSocket conn, Throwable ex);
+    public abstract void onError(NSocket conn, Throwable ex);
 
-    public abstract void onIdle(CocoSocket conn, IdleStateEvent event);
+    public abstract void onIdle(NSocket conn, IdleStateEvent event);
 
     /**
      * 初始化
@@ -48,7 +48,7 @@ public abstract class SocketListener
      * @param aThis
      * @param closeReason
      */
-    void socketClosed(CocoSocket so, boolean closeReason)
+    void socketClosed(NSocket so, boolean closeReason)
     {
         cur_connection.decrementAndGet();
         this.onClose(so, closeReason);

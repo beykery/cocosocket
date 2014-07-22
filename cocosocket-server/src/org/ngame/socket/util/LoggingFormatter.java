@@ -1,4 +1,4 @@
-package org.cocosocket.util;
+package org.ngame.socket.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
