@@ -95,7 +95,7 @@ public class TestClient extends SocketClient
      */
     public static void main(String... args)
     {
-        TestClient tc = new TestClient(new InetSocketAddress(3210), new LVProtocol());
+        TestClient tc = new TestClient(new InetSocketAddress(80), new LVProtocol());
         tc.connect();
     }
 

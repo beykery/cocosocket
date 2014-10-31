@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   Socket.h
  * Author: beykery
  *

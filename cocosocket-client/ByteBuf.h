@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   ByteBuf.h
  * Author: beykery
  *
@@ -67,7 +67,7 @@ public:
     ByteBuf* WriteUTF8(char* value);
     const ByteBuf* Copy();
     char* GetRaw();
-	static int ByteBuf::Convert(std::string& str, const char* to, const char* from);
+	//static int ByteBuf::Convert(std::string& str, const char* to, const char* from);
 private:
     char* data; //数据
     int len; //长度，可扩展长度

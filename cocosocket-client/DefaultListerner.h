@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   DefaultListerner.h
  * Author: beykery
  *

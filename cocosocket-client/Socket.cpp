@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   Socket.cpp
  * Author: beykery
  * 

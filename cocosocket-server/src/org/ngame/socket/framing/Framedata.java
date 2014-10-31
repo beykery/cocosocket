@@ -132,9 +132,15 @@ public class Framedata
 	{
 		if (!end)
 		{
-			byte[] b = s.getBytes();
-			payload.writeShort(b.length);
-			payload.writeBytes(b);
+			try
+			{
+				byte[] b = s.getBytes("utf-8");
+				payload.writeShort(b.length);
+				payload.writeBytes(b);
+			} catch (UnsupportedEncodingException ex)
+			{
+				ex.printStackTrace();
+			}
 		}
 		return this;
 	}
@@ -150,10 +156,16 @@ public class Framedata
 	{
 		if (!end)
 		{
-			byte[] b = s.getBytes();
-			payload.writeShort(b.length);
-			xor(b, ks);
-			payload.writeBytes(b);
+			try
+			{
+				byte[] b = s.getBytes("utf-8");
+				payload.writeShort(b.length);
+				xor(b, ks);
+				payload.writeBytes(b);
+			} catch (UnsupportedEncodingException ex)
+			{
+				ex.printStackTrace();
+			}
 		}
 		return this;
 	}

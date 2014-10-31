@@ -1,4 +1,4 @@
-﻿#ifndef WORKTHREAD_H
+#ifndef WORKTHREAD_H
 #define WORKTHREAD_H
 
 #include <semaphore.h>

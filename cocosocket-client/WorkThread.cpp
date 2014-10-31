@@ -1,4 +1,4 @@
-﻿#include "WorkThread.h"
+#include "WorkThread.h"
 #include "errno.h"
 #include "BlockingQueue.h"
 #include "Thread.h"

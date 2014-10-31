@@ -1,4 +1,4 @@
-﻿#ifndef AUTOMUTEX_H
+#ifndef AUTOMUTEX_H
 #define AUTOMUTEX_H
 #include "Mutext.h"
 

@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   SocketListerner.cpp
  * Author: beykery
  * 

@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   Protocal.h
  * Author: beykery
  *

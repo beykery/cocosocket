@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   ByteBuf.cpp
  * Author: beykery
  * 
@@ -10,7 +10,8 @@
 #include <math.h>
 #include <iostream>
 #include "ByteBuf.h"
-#include "iconv.h"
+#include <string.h>
+//#include "iconv.h"
 #include "cocos2d.h"
 ByteBuf::ByteBuf(int len)
 {
@@ -510,7 +511,7 @@ char* ByteBuf::GetRaw()
     return this->data;
 }
 
-
+/**
 int ByteBuf::Convert(std::string& str, const char* to, const char* from)
 {
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -559,3 +560,4 @@ int ByteBuf::Convert(std::string& str, const char* to, const char* from)
 	return 0;
 #endif
 }
+**/

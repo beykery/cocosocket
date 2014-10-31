@@ -1,7 +1,7 @@
 # cocosocket  
 
 
-cocosocket是一个为cocos2d-x手机网络游戏准备的底层通信框架，满足网络游戏客户端
+cocosocket是一个为cocos2d-x和unity 3D手机网络游戏准备的底层通信框架，满足网络游戏客户端
 对于高性能网络通信的需求，适用于基于socket的手机网游。
 
 ## 问题
@@ -76,6 +76,13 @@ server部分是一个java程序，其底层依赖于netty，netty是一个真正高性能的通信框架
 ，如果跟cocosocket-client作对比你会发现，他们的api很相似，这在某种程度上简化
 了理解这两者的难度，你可以从server端或client端入手，这将非常有助于理解另一端
 。
+
+##关于cocosocket4unity
+
+这个程序是为unity 3D准备的，api和c++版本的客户端很像，实现的是相同的功能，适用
+于unity 3D网游。里面我嵌入了litjson的代码用并修复了它的一个bug：utf8字符串乱码
+，如果你刚好需要json解析，那么建议使用，否则请删去litjson的代码即可。
+
 
 ## 结语
 

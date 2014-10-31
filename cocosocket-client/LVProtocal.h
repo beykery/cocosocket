@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   LVProtocal.h
  * Author: beykery
  *

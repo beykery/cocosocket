@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   Queue.h
  * Author: beykery
  *

@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=cocosocket
+PROJECTNAME=cocosocket-client
 
 # Active Configuration
 DEFAULTCONF=Debug

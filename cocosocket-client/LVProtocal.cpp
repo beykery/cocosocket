@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   LVProtocal.cpp
  * Author: beykery
  * 
@@ -12,7 +12,6 @@
 LVProtocal::LVProtocal()
 {
     this->status = 0;
-
     frame = NULL;
 }
 

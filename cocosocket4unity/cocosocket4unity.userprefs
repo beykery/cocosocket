@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="cocosocket4unity\ByteBuf.cs">
+    <Files>
+      <File FileName="cocosocket4unity\Main.cs" Line="1" Column="1" />
+      <File FileName="cocosocket4unity\ByteBuf.cs" Line="39" Column="39" />
+      <File FileName="cocosocket4unity\LVProtocal.cs" Line="12" Column="12" />
+      <File FileName="cocosocket4unity\Frame.cs" Line="14" Column="14" />
+      <File FileName="cocosocket4unity\USocket.cs" Line="7" Column="7" />
+      <File FileName="cocosocket4unity\SocketListner.cs" Line="55" Column="55" />
+      <File FileName="cocosocket4unity\Protocal.cs" Line="34" Column="34" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

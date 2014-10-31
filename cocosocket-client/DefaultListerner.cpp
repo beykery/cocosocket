@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * File:   DefaultListerner.cpp
  * Author: beykery
  * 
@@ -12,7 +12,7 @@
 #include "Socket.h"
 #include "ByteBuf.h"
 #include "Frame.h"
-#include "iconv.h"
+//#include "iconv.h"
 #include "cocos2d.h"
 using namespace std;
 
@@ -26,17 +26,17 @@ DefaultListerner::~DefaultListerner()
 
 void DefaultListerner::OnClose(Socket* so, bool fromRemote)
 {
-    CCLOG("%s\n","closed");
+    printf("%s\n","closed");
 }
 
 void DefaultListerner::OnError(Socket* so, const char* e)
 {
-	CCLOG("%s\n","error connection");
+	printf("%s\n","error connection");
 }
 
 void DefaultListerner::OnIdle(Socket* so)
 {
-	CCLOG("%s\n","connection idle");
+	printf("%s\n","connection idle");
 }
 
 /**
@@ -54,7 +54,7 @@ void DefaultListerner::OnMessage(Socket* so, ByteBuf* frame)
     //    wchar_t* u2 = frame->ReadUTF8();
     float c = frame->ReadFloat();
 	std::string ss=frame->ReadUTF8();
-    CCLOG("%s\n",ss.c_str());
+    printf("%s\n",ss.c_str());
     delete frame;
     //    Frame* s = new Frame(r);
     //    s->PutInt(c);
@@ -68,11 +68,11 @@ void DefaultListerner::OnMessage(Socket* so, ByteBuf* frame)
 
 void DefaultListerner::OnOpen(Socket* so)
 {
-    CCLOG("%s","connecting");
+    printf("%s","connecting");
 	Frame* f=new Frame(512);
     f->PutFloat(10.1f);
 	std::string buff="我去啊a。。。。。";
-	ByteBuf::Convert(buff,"utf-8","gbk");
+	//ByteBuf::Convert(buff,"utf-8","gbk");
 	f->PutString((char*)buff.c_str());
 	//f->PutString(s);
     f->End();

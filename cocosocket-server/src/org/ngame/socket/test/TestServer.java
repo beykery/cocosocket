@@ -6,7 +6,6 @@ package org.ngame.socket.test;
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.timeout.IdleStateEvent;
 import java.net.InetSocketAddress;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ngame.socket.NSocket;
@@ -24,7 +23,7 @@ public class TestServer extends SocketServer
 
     public TestServer(InetSocketAddress address)
     {
-        super(address,false);
+        super(address,true);
     }
 
     @Override

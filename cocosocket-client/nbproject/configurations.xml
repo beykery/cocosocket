@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="91">
+<configurationDescriptor version="94">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <logicalFolder name="f1" displayName="test" projectFiles="true" kind="ROOT">
+    <logicalFolder name="f1" displayName="test" projectFiles="true">
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="HeaderFiles" displayName="头文件" projectFiles="true">
@@ -19,6 +19,7 @@
       <itemPath>Thread.h</itemPath>
       <itemPath>ThreadPool.h</itemPath>
       <itemPath>WorkThread.h</itemPath>
+      <itemPath>cocos2d.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles" displayName="源文件" projectFiles="true">
       <itemPath>ByteBuf.cpp</itemPath>
@@ -110,6 +111,8 @@
       </item>
       <item path="WorkThread.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="cocos2d.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -180,6 +183,8 @@
       <item path="WorkThread.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="WorkThread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="cocos2d.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

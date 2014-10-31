@@ -1,4 +1,4 @@
-﻿#include "Mutext.h"
+#include "Mutext.h"
 
 Mutext::Mutext(int nShared, int nType)
 {

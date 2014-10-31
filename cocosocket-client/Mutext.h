@@ -1,10 +1,10 @@
-﻿#ifndef MUTEX_H
+#ifndef MUTEX_H
 #define MUTEX_H
 #include <pthread.h>
 
 class Mutext {
 private:
-    pthread_mutex_t mutext;
+    std::mutex mutext;
 public:
     Mutext(int sh = PTHREAD_PROCESS_PRIVATE, int type = PTHREAD_MUTEX_NORMAL);
     ~Mutext();
