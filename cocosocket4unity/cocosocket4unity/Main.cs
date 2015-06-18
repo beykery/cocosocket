@@ -17,7 +17,7 @@ namespace cocosocket4unity
 			us.setLister (listner);
 			Protocal p = new LVProtocal ();
 			us.setProtocal (p);
-			us.Connect ("10.0.110.184", 3210);
+			us.Connect ("localhost", 3210);
 			Console.Read();
 		}
 	}

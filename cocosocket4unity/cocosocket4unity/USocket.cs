@@ -18,11 +18,13 @@ namespace cocosocket4unity
 		public static int STATUS_CONNECTING=1;
 		public static int STATUS_CONNECTED=2;
 		public static int STATUS_CLOSED=3;
+		private ByteBuf buf;
 		/**
 		 * 构造（但不完善，需要设置监听器和协议解析器F）
 		 */ 
 		public USocket()
 		{
+			buf=new ByteBuf(4096);
 		}
 		/**
 		 * 构造
@@ -58,6 +60,10 @@ namespace cocosocket4unity
 			clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
 			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.NoDelay, true);
+			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 3000);
+			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 3000);
+			LingerOption linger = new LingerOption(true,0);
+			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Linger, linger);
 			clientSocket.BeginConnect(this.ip, this.port, connected, this);
 		}
 
@@ -83,7 +89,8 @@ namespace cocosocket4unity
 			this.clientSocket.EndConnect(asyncConnect);
 			this.status = STATUS_CONNECTED;
 			this.listner.OnOpen (this);
-			Thread thread = new Thread(new ThreadStart(received));
+			ByteBuf buf=new ByteBuf(4096);
+			Thread thread = new Thread(new ThreadStart(receive));
 			thread.IsBackground = true;
 			thread.Start();
 			}
@@ -123,49 +130,65 @@ namespace cocosocket4unity
 		/**
 		 * 接收数据
 		 */ 
-		private void received()
+		private void receive()
 		{
-			ByteBuf buf=new ByteBuf(4096);
-			while (true)
+			while (this.status==STATUS_CONNECTED)
 			{
-				if(!clientSocket.Connected)
+				if(clientSocket.Poll(-1, SelectMode.SelectRead))
+				{
+					try
+					{
+						clientSocket.BeginReceive(buf.GetRaw(), 0, buf.GetRaw().Length, SocketFlags.None, new AsyncCallback(onRecieved), clientSocket);
+					}
+					catch (Exception e)
+					{
+						this.status = STATUS_CLOSED;
+						this.listner.OnError(this,e.Message);
+						break;
+					}
+				}else
 				{
 					this.status = STATUS_CLOSED;
 					this.listner.OnClose (this,true);
 					break;
 				}
-				try
-				{
-					int size = clientSocket.Receive(buf.GetRaw());
-					if(size <= 0)
-					{
-						this.status = STATUS_CLOSED;
-						clientSocket.Close();
-						this.listner.OnClose (this,true);
-						break;
-					}
-					buf.ReaderIndex(0);
-					buf.WriterIndex(size);
-					while (true)
-					{
-						ByteBuf frame = this.protocal.TranslateFrame(buf);
-						if (frame != null)
-						{
-							this.listner.OnMessage(this, frame);
-						} else
-						{
-							break;
-						}
-					}
-				}
-				catch (Exception e)
-				{
-					this.status = STATUS_CLOSED;
-					this.listner.OnError(this,e.Message);
-					break;
-				}
 			}
 		}	
+		/**
+		 * 异步收取信息
+		 */ 
+		private void onRecieved(IAsyncResult ar)
+		{
+			try
+			{
+			Socket so = (Socket)ar.AsyncState;
+			int len = so.EndReceive(ar);
+			if (len > 0) 
+			{
+				buf.ReaderIndex (0);
+				buf.WriterIndex (len);
+				while (true) 
+				{
+					ByteBuf frame = this.protocal.TranslateFrame (buf);
+					if (frame != null)
+					{
+						this.listner.OnMessage (this, frame);
+					} else 
+					{
+						break;
+					}
+				}
+			} else 
+			{
+				this.status = STATUS_CLOSED;
+				this.listner.OnClose (this,true);
+			}
+			}catch(Exception e)
+			{
+				this.status = STATUS_CLOSED;
+				this.listner.OnError(this,e.Message);
+			}
+		}
 	}
 }
 
