@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ngame.socket.NClient;
 import org.ngame.socket.NServer;
-import org.ngame.socket.protocol.LVProtocol;
+import org.ngame.socket.protocol.Varint32HeaderProtocol;
 
 /**
  *
@@ -20,71 +20,77 @@ import org.ngame.socket.protocol.LVProtocol;
 public class TestServer extends NServer
 {
 
-    private static final Logger LOG = Logger.getLogger(TestServer.class.getName());
+  private static final Logger LOG = Logger.getLogger(TestServer.class.getName());
 
-    public TestServer(InetSocketAddress address)
-    {
-        super(address, NServer.NETWORK_SOCKET);
-    }
+  public TestServer(InetSocketAddress address)
+  {
+    super(address, NServer.NETWORK_SOCKET);
+  }
 
-    @Override
-    public void onOpen(NClient conn)
-    {
-        LOG.log(Level.WARNING, "链接到来：" + conn);
-        //conn.idle(2, 2, 2, TimeUnit.SECONDS);
-    }
+  @Override
+  public void onOpen(NClient conn)
+  {
+    LOG.log(Level.WARNING, "链接到来：" + conn);
+    //conn.idle(2, 2, 2, TimeUnit.SECONDS);
+  }
 
-    @Override
-    public void onClose(NClient conn, boolean local)
-    {
-        LOG.log(Level.WARNING, "连接关闭：" + conn + local);
-    }
+  @Override
+  public void onClose(NClient conn, boolean local)
+  {
+    LOG.log(Level.WARNING, "连接关闭：" + conn + local);
+  }
 
-    @Override
-    public void onMessage(NClient conn, Object message)
+  @Override
+  public void onMessage(NClient conn, Object message)
+  {
+    if (message instanceof TextWebSocketFrame)
     {
-        if (message instanceof TextWebSocketFrame)
-        {
-            TextWebSocketFrame f = (TextWebSocketFrame) message;
-            System.out.println(f);
-            System.out.println(f.text());
-        } else
-        {
-            ByteBuf bb = (ByteBuf) message;
-            bb.readerIndex(2);
-            byte[] c = new byte[bb.readShort()];
-            bb.readBytes(c);
-            System.out.println(new String(c));
-            bb.readerIndex(0);
-            conn.sendFrame(bb);
-        }
+      TextWebSocketFrame f = (TextWebSocketFrame) message;
+      System.out.println(f);
+      System.out.println(f.text());
+    } else
+    {
+      ByteBuf bb = (ByteBuf) message;
+      bb.readerIndex(conn.getProtocol().headerLen());
+      byte[] c = new byte[bb.readShort()];
+      bb.readBytes(c);
+      System.out.println(new String(c));
+      bb.readerIndex(0);
+      conn.sendFrame(bb);
     }
+    try
+    {
+      Thread.sleep(500);
+    } catch (Exception e)
+    {
+    }
+  }
 
-    @Override
-    public void onError(NClient conn, Throwable ex)
-    {
-        ex.printStackTrace();
-        LOG.log(Level.WARNING, "异常：" + ex.getMessage());
-        conn.close();
-    }
+  @Override
+  public void onError(NClient conn, Throwable ex)
+  {
+    ex.printStackTrace();
+    LOG.log(Level.WARNING, "异常：" + ex.getMessage());
+    conn.close();
+  }
 
-    public static void main(String... args) throws InterruptedException
-    {
-        TestServer server = new TestServer(new InetSocketAddress(3210));
-        server.setProtocol(LVProtocol.class);
-        server.start();
-    }
+  public static void main(String... args) throws InterruptedException
+  {
+    TestServer server = new TestServer(new InetSocketAddress(1106));
+    server.setProtocol(Varint32HeaderProtocol.class);
+    server.start();
+  }
 
-    @Override
-    protected void preStop()
-    {
-        LOG.log(Level.WARNING, "马上停止服务器");
-    }
+  @Override
+  protected void preStop()
+  {
+    LOG.log(Level.WARNING, "马上停止服务器");
+  }
 
-    @Override
-    public void onIdle(NClient conn, IdleStateEvent event)
-    {
-        System.out.println("idle");
-        conn.close();
-    }
+  @Override
+  public void onIdle(NClient conn, IdleStateEvent event)
+  {
+    System.out.println("idle");
+    conn.close();
+  }
 }

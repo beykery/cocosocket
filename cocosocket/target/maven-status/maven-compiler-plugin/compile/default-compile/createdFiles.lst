@@ -1,9 +1,12 @@
 org\ngame\socket\test\TestClient$1.class
 org\ngame\socket\util\Base64$1.class
 org\ngame\socket\NListener.class
+org\ngame\socket\protocol\Varint32HeaderProtocol.class
 org\ngame\socket\LocalClient$1.class
 org\ngame\socket\test\TestServer.class
+org\ngame\socket\util\CodedInputStream.class
 org\ngame\socket\util\Base64$OutputStream.class
+org\ngame\socket\framing\Varint32Framedata.class
 org\ngame\socket\test\TestLocalServer.class
 org\ngame\socket\exeptions\LimitExedeedException.class
 org\ngame\socket\util\Base64.class
@@ -16,6 +19,7 @@ org\ngame\socket\framing\Framedata.class
 org\ngame\socket\util\LoggingFormatter.class
 org\ngame\socket\util\Base64$InputStream.class
 org\ngame\socket\SocketClient$1.class
+org\ngame\socket\util\CodedOutputStream.class
 org\ngame\socket\test\WebSocketClientHandler.class
 org\ngame\socket\test\TestClient.class
 org\ngame\socket\SocketClient.class

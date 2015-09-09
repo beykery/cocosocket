@@ -17,38 +17,55 @@ import org.ngame.socket.exeptions.LimitExedeedException;
 public abstract class Protocol
 {
 
-	protected NClient context;
-	public static ByteOrder order = ByteOrder.BIG_ENDIAN;
+  protected NClient context;
+  public static ByteOrder order = ByteOrder.BIG_ENDIAN;
+  protected int maxFrameSize = Integer.MAX_VALUE;//最大帧长度
 
-	static
-	{
-		try
-		{
-			String o = System.getProperty("byte.order");
-			order = (o == null || "BIG_ENDIAN".equals(o)) ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN;
-		} catch (Exception e)
-		{
-		}
-	}
+  static
+  {
+    try
+    {
+      String o = System.getProperty("byte.order");
+      order = (o == null || "BIG_ENDIAN".equals(o)) ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN;
+    } catch (Exception e)
+    {
+    }
+  }
 
-	/**
-	 * 上下文
-	 *
-	 * @param context
-	 */
-	public void setContext(NClient context)
-	{
-		this.context = context;
-	}
+  /**
+   * 上下文
+   *
+   * @param context
+   */
+  public void setContext(NClient context)
+  {
+    this.context = context;
+  }
 
-	/**
-	 * 解析一帧数据
-	 *
-	 * @param buf
-	 * @return
-	 * @throws LimitExedeedException
-	 * @throws InvalidDataException
-	 */
-	public abstract ByteBuf translateFrame(ByteBuf buf) throws LimitExedeedException, InvalidDataException;
+  /**
+   * 解析一帧数据
+   *
+   * @param buf
+   * @return
+   * @throws LimitExedeedException
+   * @throws InvalidDataException
+   */
+  public abstract ByteBuf translateFrame(ByteBuf buf) throws Exception;
 
+  /**
+   * 解析完成的数据的头部字节数
+   *
+   * @return
+   */
+  public abstract int headerLen();
+
+  public void setMaxFrameSize(int maxFrameSize)
+  {
+    this.maxFrameSize = maxFrameSize;
+  }
+
+  public int getMaxFrameSize()
+  {
+    return maxFrameSize;
+  }
 }

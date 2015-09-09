@@ -604,7 +604,7 @@ public final class NClient extends ChannelInboundHandlerAdapter
    *
    * @param bb
    */
-  private void cutFrame(ByteBuf bb) throws InvalidDataException
+  private void cutFrame(ByteBuf bb) throws Exception
   {
     try
     {

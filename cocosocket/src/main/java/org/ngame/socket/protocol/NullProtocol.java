@@ -15,20 +15,27 @@ import org.ngame.socket.exeptions.LimitExedeedException;
 public class NullProtocol extends Protocol
 {
 
-	public NullProtocol()
-	{
-	}
+  public NullProtocol()
+  {
+  }
 
-	@Override
-	public ByteBuf translateFrame(ByteBuf buf) throws LimitExedeedException, InvalidDataException
-	{
-		if (buf.isReadable())
-		{
-			ByteBuf r = PooledByteBufAllocator.DEFAULT.buffer(buf.readableBytes() + 8);
-			r = r.order(order);
-			r.writeBytes(buf);
-			return r;
-		}
-		return null;
-	}
+  @Override
+  public ByteBuf translateFrame(ByteBuf buf) throws LimitExedeedException, InvalidDataException
+  {
+    if (buf.isReadable())
+    {
+      ByteBuf r = PooledByteBufAllocator.DEFAULT.buffer(buf.readableBytes() + 8);
+      r = r.order(order);
+      r.writeBytes(buf);
+      return r;
+    }
+    return null;
+  }
+
+  @Override
+  public int headerLen()
+  {
+    return 0;
+  }
+
 }

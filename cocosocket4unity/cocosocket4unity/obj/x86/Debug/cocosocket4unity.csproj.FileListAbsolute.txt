@@ -2,3 +2,8 @@ D:\projects\cocosocket4unity\cocosocket4unity\bin\Debug\cocosocket4unity.exe
 D:\projects\cocosocket4unity\cocosocket4unity\bin\Debug\cocosocket4unity.pdb
 D:\projects\cocosocket4unity\cocosocket4unity\obj\x86\Debug\cocosocket4unity.exe
 D:\projects\cocosocket4unity\cocosocket4unity\obj\x86\Debug\cocosocket4unity.pdb
+D:\projects\open\cocosocket\cocosocket4unity\cocosocket4unity\bin\Debug\cocosocket4unity.exe
+D:\projects\open\cocosocket\cocosocket4unity\cocosocket4unity\bin\Debug\cocosocket4unity.pdb
+D:\projects\open\cocosocket\cocosocket4unity\cocosocket4unity\bin\Debug\protobuf-net.dll
+D:\projects\open\cocosocket\cocosocket4unity\cocosocket4unity\obj\x86\Debug\cocosocket4unity.exe
+D:\projects\open\cocosocket\cocosocket4unity\cocosocket4unity\obj\x86\Debug\cocosocket4unity.pdb

@@ -36,7 +36,12 @@ namespace cocosocket4unity
 					status = 2;
 					break;
 				case 2:
-					frame.WriteBytes(src);
+				    int min=frame.WritableBytes();
+					min=src.ReadableBytes()<min?src.ReadableBytes():min;
+					if(min>0)
+					{
+					frame.WriteBytes(src,min);
+					}
 					if (frame.WritableBytes() <= 0)
 					{
 						status = 0;
@@ -46,6 +51,14 @@ namespace cocosocket4unity
 				}
 			}
 			return null;
+		}
+		/**
+		 * 头部长度
+		 * 
+		 */ 
+		public int HeaderLen()
+		{
+			return 2;
 		}
 	}
 }

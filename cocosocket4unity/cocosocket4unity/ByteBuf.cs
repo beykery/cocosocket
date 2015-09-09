@@ -359,6 +359,20 @@ namespace cocosocket4unity
 		/**
 		 * 写入一部分字节
 		 **/ 
+		public ByteBuf WriteBytes(ByteBuf src ,int len)
+		{
+			if (len > 0)
+			{
+				Capacity(writerIndex + len);
+				Array.Copy (src.data, src.readerIndex, data, writerIndex, len);
+				writerIndex += len;
+				src.readerIndex += len;
+			}
+			return this;
+		}
+		/**
+		 * 写入一部分字节
+		 **/ 
 		public ByteBuf WriteBytes(byte[] src)
 		{
 			int sum = src.Length;
@@ -366,6 +380,20 @@ namespace cocosocket4unity
 			if (sum > 0)
 			{
 				Array.Copy (src, 0, data, writerIndex, sum);
+				writerIndex += sum;
+			}
+			return this;
+		}
+		/**
+		 * 写入一部分字节
+		 **/ 
+		public ByteBuf WriteBytes(byte[] src,int off,int len)
+		{
+			int sum = len;
+			if (sum > 0)
+			{
+				Capacity(writerIndex + sum);
+				Array.Copy (src,off, data, writerIndex, sum);
 				writerIndex += sum;
 			}
 			return this;

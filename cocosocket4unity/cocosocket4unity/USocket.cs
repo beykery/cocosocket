@@ -50,6 +50,13 @@ namespace cocosocket4unity
 			this.protocal = p;
 		}
 		/**
+		 * 协议
+		 */ 
+		public Protocal getProtocal()
+		{
+			return this.protocal;
+		}
+		/**
 		 * 连接指定地址
 		 */ 
 		public void Connect(string ip,int port)
