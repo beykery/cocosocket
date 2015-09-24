@@ -4,6 +4,7 @@ using System;
 
 namespace cocosocket4unity
 {
+    [Proto(value=12)]
     [ProtoContract]
     public class AuthRequest	// 协议:6
     {

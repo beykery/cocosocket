@@ -11,7 +11,11 @@ namespace cocosocket4unity
 	{
 		public static void Main (string[] args)
 		{
-
+            AuthRequest ar = new AuthRequest();
+            string json = JsonMapper.ToJson(ar);
+            Console.WriteLine(ar.GetType().Name+":"+json);
+            Console.Read();
+            /**
 			SocketListner listner = new TestListner ();
 			USocket us = new USocket ();
 			us.setLister (listner);
@@ -20,6 +24,7 @@ namespace cocosocket4unity
 			us.setProtocal (p);
 			us.Connect ("localhost", 4887);
 			Console.Read();
+             */
 		}
 	}
 }

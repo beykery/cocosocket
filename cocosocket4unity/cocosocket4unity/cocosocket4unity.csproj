@@ -41,10 +41,12 @@
   <ItemGroup>
     <Compile Include="AuthRequest.cs" />
     <Compile Include="AuthResponse.cs" />
+    <Compile Include="ClassUtil.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ByteBuf.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="ProtoAttribute.cs" />
     <Compile Include="Protocal.cs" />
     <Compile Include="LVProtocal.cs" />
     <Compile Include="USocket.cs" />
