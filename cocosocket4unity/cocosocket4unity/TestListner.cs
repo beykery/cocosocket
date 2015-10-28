@@ -4,6 +4,7 @@ using ProtoBuf.Serializers;
 using System.Collections.Generic;
 using System;
 using System.IO;
+using protocol;
 namespace cocosocket4unity
 {
 	public class TestListner : SocketListner

@@ -13,7 +13,7 @@ namespace cocosocket4unity
             List<Type> list = new List<Type>();
             foreach (Type type in asm.GetTypes())
             {
-                if (type.Namespace.Equals(nameSpace))
+                if (nameSpace.Equals(type.Namespace))
                     list.Add(type);
             }
             return list;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using System.Net;
+using protocol;
 namespace cocosocket4unity
 {
 	class MainClass
@@ -14,6 +15,14 @@ namespace cocosocket4unity
             AuthRequest ar = new AuthRequest();
             string json = JsonMapper.ToJson(ar);
             Console.WriteLine(ar.GetType().Name+":"+json);
+            List<Type> ls = ClassUtil.GetClasses("protocol");
+            foreach (Type item in ls)
+            {
+              Console.WriteLine(item.Name);
+              ProtoAttribute arr=  (ProtoAttribute)ClassUtil.GetAttribute(item,typeof(ProtoAttribute));
+                if(arr!=null)
+              Console.WriteLine(arr.value);
+            }
             Console.Read();
             /**
 			SocketListner listner = new TestListner ();
