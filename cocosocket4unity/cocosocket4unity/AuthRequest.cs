@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System;
 
-namespace cocosocket4unity
+namespace protocol
 {
-    [Proto(value=12)]
+    [Proto(value=6)]
     [ProtoContract]
     public class AuthRequest	// 协议:6
     {

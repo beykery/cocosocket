@@ -14,7 +14,7 @@ public abstract class NListener
 {
 
 	private static final Logger LOG = Logger.getLogger(NListener.class.getName());
-	int max_connection = 1000000;//百万
+	int max_connection = Integer.MAX_VALUE;
 	AtomicInteger cur_connection = new AtomicInteger(0);
 
 	public abstract void onOpen(NClient conn);
