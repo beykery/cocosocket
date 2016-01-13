@@ -19,13 +19,14 @@ namespace cocosocket4unity
 			bb.ReaderIndex (us.getProtocal().HeaderLen());
 
             int cmd = bb.ReadShort();
+            Type t=null;
             MemoryStream stream = new MemoryStream(bb.GetRaw(),bb.ReaderIndex(),bb.ReadableBytes());
-            AuthResponse response= ProtoBuf.Serializer.Deserialize<AuthResponse>(stream);
-
+            object response=ProtoBuf.Serializer.NonGeneric.Deserialize(t,stream);
+            /**
 			Console.WriteLine (response.pid);
             Console.WriteLine(response.info);
             Console.WriteLine(response.success);
-
+            */
 		}
 		/**
 		 * 
@@ -46,8 +47,8 @@ namespace cocosocket4unity
             request.serverid = 1;
             MemoryStream  stream = new MemoryStream();
             ProtoBuf.Serializer.Serialize<AuthRequest>(stream, request);
-           
-            Frame f = new Frame(512);
+
+            Varint32Frame f = new Varint32Frame(512);
             f.PutShort(6);
             f.PutBytes(stream.ToArray());
             f.End();

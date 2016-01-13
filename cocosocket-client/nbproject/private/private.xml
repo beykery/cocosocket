@@ -7,10 +7,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/projects/cocosocket/cocosocket-client/AutoLock.h</file>
-            <file>file:/D:/projects/cocosocket/cocosocket-client/Mutext.h</file>
-            <file>file:/D:/projects/cocosocket/cocosocket-client/BlockingQueue.h</file>
-            <file>file:/D:/projects/cocosocket/cocosocket-client/Mutext.cpp</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/cocos2d.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/ThreadPool.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/AutoLock.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/Queue.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/SocketListerner.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/BlockingQueue.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/main.cpp</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/LVProtocal.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/DefaultListerner.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/Protocal.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/ByteBuf.cpp</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/Frame.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/ByteBuf.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/WorkThread.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/Mutext.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/Thread.h</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/Mutext.cpp</file>
+            <file>file:/D:/projects/open/cocosocket/cocosocket-client/Socket.h</file>
         </group>
     </open-files>
 </project-private>

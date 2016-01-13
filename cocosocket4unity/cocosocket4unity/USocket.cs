@@ -14,10 +14,12 @@ namespace cocosocket4unity
 		private string ip;
 		private int port;
 		private int status;
-		public static int STATUS_INIT=0;
-		public static int STATUS_CONNECTING=1;
-		public static int STATUS_CONNECTED=2;
-		public static int STATUS_CLOSED=3;
+        private bool asyc;//异步收取
+        private bool serverClose=true;//服务器主动关闭
+		public const  int STATUS_INIT=0;
+        public const int STATUS_CONNECTING = 1;
+        public const int STATUS_CONNECTED = 2;
+        public const int STATUS_CLOSED = 3;
 		private ByteBuf buf;
 		/**
 		 * 构造（但不完善，需要设置监听器和协议解析器F）
@@ -56,23 +58,40 @@ namespace cocosocket4unity
 		{
 			return this.protocal;
 		}
+        public int getStatus()
+        {
+            return this.status;
+        }
+        public bool isAsyc()
+        {
+            return asyc;
+        }
+        public void setAsyc(bool a)
+        {
+            this.asyc = a;
+        }
+        public string getIp()
+        {
+            return this.ip;
+        }
+        public int getPort()
+        {
+            return this.port;
+        }
 		/**
 		 * 连接指定地址
-		 */ 
-		public void Connect(string ip,int port)
-		{
-			this.status = STATUS_CONNECTING;
-			this.ip = ip;
-			this.port = port;
-			clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
-			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.NoDelay, true);
-			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 3000);
-			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 3000);
-			LingerOption linger = new LingerOption(true,0);
-			clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Linger, linger);
-			clientSocket.BeginConnect(this.ip, this.port, connected, this);
-		}
+		 */
+        public void Connect(string ip, int port)
+        {
+            this.status = STATUS_CONNECTING;
+            this.ip = ip;
+            this.port = port;
+            clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            clientSocket.NoDelay = true;
+            LingerOption linger = new LingerOption(false, 0);
+            clientSocket.LingerState = linger;
+            clientSocket.BeginConnect(this.ip, this.port, connected, this);
+        }
 
 		/**
 		 * 关闭连接
@@ -84,6 +103,7 @@ namespace cocosocket4unity
 				clientSocket.Shutdown(SocketShutdown.Both);
 				clientSocket.Close();
 				this.status = STATUS_CLOSED;
+                this.serverClose = false;
 			}
 		}
 		/**
@@ -96,7 +116,6 @@ namespace cocosocket4unity
 			this.clientSocket.EndConnect(asyncConnect);
 			this.status = STATUS_CONNECTED;
 			this.listner.OnOpen (this);
-			ByteBuf buf=new ByteBuf(4096);
 			Thread thread = new Thread(new ThreadStart(receive));
 			thread.IsBackground = true;
 			thread.Start();
@@ -143,23 +162,51 @@ namespace cocosocket4unity
 			{
 				if(clientSocket.Poll(-1, SelectMode.SelectRead))
 				{
-					try
-					{
-						clientSocket.BeginReceive(buf.GetRaw(), 0, buf.GetRaw().Length, SocketFlags.None, new AsyncCallback(onRecieved), clientSocket);
-					}
-					catch (Exception e)
-					{
-						this.status = STATUS_CLOSED;
-						this.listner.OnError(this,e.Message);
-						break;
-					}
+                    try{
+                    if (asyc)//异步收取
+                    {
+                          clientSocket.BeginReceive(buf.GetRaw(), 0, buf.GetRaw().Length, SocketFlags.None, new AsyncCallback(onRecieved), clientSocket);
+                    }else //同步收取
+                    {
+                      int len= clientSocket.Receive(buf.GetRaw());
+                      if (len > 0)
+                      {
+                          buf.ReaderIndex(0);
+                          buf.WriterIndex(len);
+                          while (true)
+                          {
+                              ByteBuf frame = this.protocal.TranslateFrame(buf);
+                              if (frame != null)
+                              {
+                                  this.listner.OnMessage(this, frame);
+                              }
+                              else
+                              {
+                                  break;
+                              }
+                          }
+                      }
+                      else
+                      {
+                          this.status = STATUS_CLOSED;
+                          this.listner.OnClose(this, serverClose);
+                      }
+                    }
+                    }
+                    catch (Exception e)
+                    {
+                        this.status = STATUS_CLOSED;
+                        this.listner.OnError(this, e.Message);
+                        break;
+                    }
 				}else
 				{
 					this.status = STATUS_CLOSED;
-					this.listner.OnClose (this,true);
+                    this.listner.OnClose(this, serverClose);
 					break;
 				}
 			}
+            this.listner.OnClose(this, serverClose);
 		}	
 		/**
 		 * 异步收取信息
@@ -188,7 +235,7 @@ namespace cocosocket4unity
 			} else 
 			{
 				this.status = STATUS_CLOSED;
-				this.listner.OnClose (this,true);
+                this.listner.OnClose(this, serverClose);
 			}
 			}catch(Exception e)
 			{

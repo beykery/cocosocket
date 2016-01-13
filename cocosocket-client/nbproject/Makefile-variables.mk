@@ -7,21 +7,21 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=Cygwin_4.x-Windows
-CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin_4.x-Windows
+CND_PLATFORM_Debug=MinGW1-Windows
+CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW1-Windows
 CND_ARTIFACT_NAME_Debug=cocosocket-client
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/cocosocket-client
-CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin_4.x-Windows/package
+CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW1-Windows/cocosocket-client
+CND_PACKAGE_DIR_Debug=dist/Debug/MinGW1-Windows/package
 CND_PACKAGE_NAME_Debug=cocosocket-client.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/package/cocosocket-client.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/MinGW1-Windows/package/cocosocket-client.tar
 # Release configuration
-CND_PLATFORM_Release=Cygwin_4.x-Windows
-CND_ARTIFACT_DIR_Release=dist/Release/Cygwin_4.x-Windows
+CND_PLATFORM_Release=MinGW1-Windows
+CND_ARTIFACT_DIR_Release=dist/Release/MinGW1-Windows
 CND_ARTIFACT_NAME_Release=cocosocket-client
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin_4.x-Windows/cocosocket-client
-CND_PACKAGE_DIR_Release=dist/Release/Cygwin_4.x-Windows/package
+CND_ARTIFACT_PATH_Release=dist/Release/MinGW1-Windows/cocosocket-client
+CND_PACKAGE_DIR_Release=dist/Release/MinGW1-Windows/package
 CND_PACKAGE_NAME_Release=cocosocket-client.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin_4.x-Windows/package/cocosocket-client.tar
+CND_PACKAGE_PATH_Release=dist/Release/MinGW1-Windows/package/cocosocket-client.tar
 #
 # include compiler specific variables
 #
