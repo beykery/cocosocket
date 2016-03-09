@@ -9,5 +9,6 @@ namespace protocol
     class ProtoAttribute : Attribute
     {
         public int value { get; set; }
+		public string description { get; set; }
     }
 }

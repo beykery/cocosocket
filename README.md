@@ -75,7 +75,12 @@ server部分是一个java程序，其底层依赖于netty，netty是一个真正高性能的通信框架
 ，cocosocket-server隐藏了许多netty的复杂性（netty不仅仅用于tcp/ip协议的通信）
 ，如果跟cocosocket-client作对比你会发现，他们的api很相似，这在某种程度上简化
 了理解这两者的难度，你可以从server端或client端入手，这将非常有助于理解另一端
-。
+。坐标：
+  <dependency>
+      <groupId>org.beykery</groupId>
+      <artifactId>cocosocket</artifactId>
+      <version>1.0.0</version>
+  </dependency>
 
 ##关于cocosocket4unity
 
