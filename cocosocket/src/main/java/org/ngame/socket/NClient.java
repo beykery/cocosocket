@@ -40,7 +40,6 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.handler.codec.http.websocketx.WebSocketVersion;
 import java.net.SocketAddress;
 import java.net.URI;
-import org.ngame.socket.exeptions.InvalidDataException;
 
 /**
  * @author beykery
@@ -63,6 +62,13 @@ public final class NClient extends ChannelInboundHandlerAdapter
   private int network;//http,websocket,socket,local
   private WebSocketServerHandshaker handshaker;
   private WebSocketClientHandshaker clientHandshaker;
+  /**
+   * 流控
+   */
+  private long last;//最近一次记时
+  private long counter;//协议计数器
+  private long maxCounter;//最大
+  private long mills;//时间
 
   /**
    * 连接
@@ -90,7 +96,7 @@ public final class NClient extends ChannelInboundHandlerAdapter
     switch (this.network)
     {
       case NServer.NETWORK_LOCAL:
-        this.listener.onMessage(this, msg);
+        this.onMessage(msg);
         break;
       case NServer.NETWORK_SOCKET:
         bb = (ByteBuf) msg;
@@ -107,7 +113,7 @@ public final class NClient extends ChannelInboundHandlerAdapter
           WebSocketFrame frame = (WebSocketFrame) msg;
           if (frame instanceof TextWebSocketFrame)
           {
-            this.listener.onMessage(this, msg);
+            this.onMessage(msg);
           } else if (frame instanceof CloseWebSocketFrame)
           {
             ctx.channel().close();
@@ -171,6 +177,7 @@ public final class NClient extends ChannelInboundHandlerAdapter
   public void channelInactive(ChannelHandlerContext ctx) throws Exception
   {
     this.listener.socketClosed(this, closeReason);
+    this.protocol.release();
   }
 
   @Override
@@ -518,6 +525,22 @@ public final class NClient extends ChannelInboundHandlerAdapter
   }
 
   /**
+   * 繁忙检查
+   *
+   * @param maxCount 最大消息数量
+   * @param seconds 时间间隔（秒）
+   */
+  public void busy(int maxCount, int seconds)
+  {
+    if (maxCount <= 0 || seconds <= 0)
+    {
+      throw new IllegalArgumentException("参数错误,不可以小于0");
+    }
+    this.maxCounter = maxCount;
+    this.mills = seconds * 1000;
+  }
+
+  /**
    * http请求
    *
    * @param ctx
@@ -596,7 +619,7 @@ public final class NClient extends ChannelInboundHandlerAdapter
     {
       throw new UnsupportedOperationException(String.format("%s 不支持", frame.getClass().getName()));
     }
-    this.listener.onMessage(this, frame);
+    this.onMessage(frame);
   }
 
   /**
@@ -611,12 +634,50 @@ public final class NClient extends ChannelInboundHandlerAdapter
       ByteBuf fd = protocol.translateFrame(bb);
       while (fd != null)
       {
-        this.listener.onMessage(this, fd);
+        this.onMessage(fd);
         fd = protocol.translateFrame(bb);
       }
     } finally
     {
       bb.release();
     }
+  }
+
+  /**
+   * 消息
+   *
+   * @param msg
+   */
+  private void onMessage(Object msg)
+  {
+    this.listener.onMessage(this, msg);
+    if (mills > 0)
+    {
+      long now = System.currentTimeMillis();
+      if (last <= 0)
+      {
+        last = now;
+        counter = 0;
+        return;
+      }
+      this.counter++;
+      if (counter >= maxCounter)
+      {
+        if (now - last <= mills)
+        {
+          this.onBusy();
+        }
+        counter = 0;
+        last = now;
+      }
+    }
+  }
+
+  /**
+   * 繁忙
+   */
+  private void onBusy()
+  {
+    this.listener.onBusy(this);
   }
 }

@@ -1,0 +1,10 @@
+5.2.4f1:2.1.0.0
+StandaloneWindows
+D:/programfiles/Unity524f1/Editor/Data/Managed/UnityEngine.dll
+D:/programfiles/Unity524f1/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll
+D:/programfiles/Unity524f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
+D:/programfiles/Unity524f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
+D:/programfiles/Unity524f1/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll
+D:/programfiles/Unity524f1/Editor/Data/Managed/UnityEditor.dll
+D:/programfiles/Unity524f1/Editor/Data\Managed/Mono.Cecil.dll
+D:/programfiles/Unity524f1/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll

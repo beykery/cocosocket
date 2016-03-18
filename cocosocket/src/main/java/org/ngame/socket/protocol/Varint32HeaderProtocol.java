@@ -98,4 +98,10 @@ public class Varint32HeaderProtocol extends Protocol
   {
     return this.headerLen;
   }
+
+  @Override
+  public void release()
+  {
+    this.incompleteframe.release();
+  }
 }

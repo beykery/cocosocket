@@ -80,10 +80,9 @@ server部分是一个java程序，其底层依赖于netty，netty是一个真正高性能的通信框架
   <dependency>
       <groupId>org.beykery</groupId>
       <artifactId>cocosocket</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
   </dependency>
 ```
-
 ##关于cocosocket4unity
 
 这个程序是为unity 3D准备的，api和c++版本的客户端很像，实现的是相同的功能，适用

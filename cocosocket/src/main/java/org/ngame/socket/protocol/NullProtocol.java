@@ -38,4 +38,10 @@ public class NullProtocol extends Protocol
     return 0;
   }
 
+  @Override
+  public void release()
+  {
+
+  }
+
 }

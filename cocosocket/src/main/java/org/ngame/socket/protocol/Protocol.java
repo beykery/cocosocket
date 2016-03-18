@@ -53,6 +53,11 @@ public abstract class Protocol
   public abstract ByteBuf translateFrame(ByteBuf buf) throws Exception;
 
   /**
+   * 释放内存
+   */
+  public abstract void release();
+
+  /**
    * 解析完成的数据的头部字节数
    *
    * @return

@@ -93,4 +93,10 @@ public class TestServer extends NServer
     System.out.println("idle");
     conn.close();
   }
+
+  @Override
+  public void onBusy(NClient conn)
+  {
+    System.out.println("繁忙");
+  }
 }

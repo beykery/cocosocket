@@ -101,8 +101,20 @@ public class TestLocalServer extends LocalServer
 				System.out.println("onidle:" + conn);
 				conn.close();
 			}
+
+      @Override
+      public void onBusy(NClient conn)
+      {
+       
+      }
 		};
 		lc.connect().sync();
 		lc.connection().idle(3, 0, 0, TimeUnit.SECONDS);
 	}
+
+  @Override
+  public void onBusy(NClient conn)
+  {
+   
+  }
 }

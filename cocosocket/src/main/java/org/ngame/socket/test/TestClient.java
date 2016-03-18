@@ -105,4 +105,10 @@ public class TestClient extends SocketClient
   {
     conn.close();
   }
+
+  @Override
+  public void onBusy(NClient conn)
+  {
+    LOG.log(Level.WARNING, "繁忙：" + conn);
+  }
 }

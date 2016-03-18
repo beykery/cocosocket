@@ -2,6 +2,7 @@ package org.ngame.socket.protocol;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
+import io.netty.util.ResourceLeak;
 import io.netty.util.internal.PlatformDependent;
 import org.ngame.socket.exeptions.LimitExedeedException;
 import java.nio.ByteOrder;
@@ -84,5 +85,11 @@ public class LVProtocol extends Protocol
   public int headerLen()
   {
     return 2;
+  }
+
+  @Override
+  public void release()
+  {
+    this.incompleteframe.release();
   }
 }
