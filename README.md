@@ -1,33 +1,33 @@
 # cocosocket  
 
 
-cocosocketÊÇÒ»¸öÎªcocos2d-xºÍunity 3DÊÖ»úÍøÂçÓÎÏ·×¼±¸µÄµ×²ãÍ¨ÐÅ¿ò¼Ü£¬Âú×ãÍøÂçÓÎÏ·¿Í»§¶Ë
-¶ÔÓÚ¸ßÐÔÄÜÍøÂçÍ¨ÐÅµÄÐèÇó£¬ÊÊÓÃÓÚ»ùÓÚsocketµÄÊÖ»úÍøÓÎ¡£
+cocosocketæ˜¯ä¸€ä¸ªä¸ºcocos2d-xå’Œunity 3Dæ‰‹æœºç½‘ç»œæ¸¸æˆå‡†å¤‡çš„åº•å±‚é€šä¿¡æ¡†æž¶ï¼Œæ»¡è¶³ç½‘ç»œæ¸¸æˆå®¢æˆ·ç«¯
+å¯¹äºŽé«˜æ€§èƒ½ç½‘ç»œé€šä¿¡çš„éœ€æ±‚ï¼Œé€‚ç”¨äºŽåŸºäºŽsocketçš„æ‰‹æœºç½‘æ¸¸ã€‚
 
-## ÎÊÌâ
+## é—®é¢˜
 
-¿ª·¢cocos2d-xÍøÂçÓÎÏ·ÆäÖÐÒ»¸öÖØµãÊÇÊéÐ´ÎÈ¶¨¿É¿¿µÄsocketÍ¨ÐÅ²ã¡£¶øbsd socketÊÇ
-Ò»¸öcÓïÑÔµÄº¯Êý¿â£¬Ê¹ÓÃÆðÀ´ÆÄ·±Ëö£¨beykery²»Ï²»¶£©£¬ÎÒÃÇÐèÒªÒ»¸öÎÈ¶¨¿É¿¿²¢ÇÒ
-apiÓÖ×ã¹»¼ò½àµÄÍ¨ÐÅ²ã¡£ËüÐèÒª¾ß±¸½¨Á¢Á¬½Ó¶ÁÐ´»ù±¾ÀàÐÍ£¨byte¡¢short¡¢int¡¢long¡¢
-utf8×Ö·û´®£©µÄÄÜÁ¦¡¢¿ÉÁé»îÉè¼ÆÍ¨ÐÅÐ­Òé£¨·ÖÖ¡¡¢´¦ÀíÕ³°ü£©µÄÄÜÁ¦£»Ëü»¹ÐèÒªÔËÐÐÔÚ
-¶ÀÁ¢ÓÚÓÎÏ·Ö÷Ïß³ÌµÄÏß³ÌÀï¡¢ÍøÂçÊÂ¼þ£¨½¨Á¢¡¢¹Ø±Õ¡¢Òì³£¡¢°üµ½À´µÈ£©·¢ÉúÊ±»Øµ÷¼àÌý
-Æ÷¡£»òÐíÎÒÃÇ»¹ÓÐÍ¬²½µÄÐèÇó¼ÙÈçÎÒÃÇ°ÑÊÕµ½µÄ°ü·Åµ½Ò»¸ö´ý´¦Àí¶ÓÁÐ£¨queue£©ÀïÃæ£¬
-¶øÓÎÏ·Ö÷Ïß³ÌÐèÒª·ÃÎÊÕâ¸ö¶ÓÁÐ¡£
+å¼€å‘cocos2d-xç½‘ç»œæ¸¸æˆå…¶ä¸­ä¸€ä¸ªé‡ç‚¹æ˜¯ä¹¦å†™ç¨³å®šå¯é çš„socketé€šä¿¡å±‚ã€‚è€Œbsd socketæ˜¯
+ä¸€ä¸ªcè¯­è¨€çš„å‡½æ•°åº“ï¼Œä½¿ç”¨èµ·æ¥é¢‡ç¹çï¼ˆbeykeryä¸å–œæ¬¢ï¼‰ï¼Œæˆ‘ä»¬éœ€è¦ä¸€ä¸ªç¨³å®šå¯é å¹¶ä¸”
+apiåˆè¶³å¤Ÿç®€æ´çš„é€šä¿¡å±‚ã€‚å®ƒéœ€è¦å…·å¤‡å»ºç«‹è¿žæŽ¥è¯»å†™åŸºæœ¬ç±»åž‹ï¼ˆbyteã€shortã€intã€longã€
+utf8å­—ç¬¦ä¸²ï¼‰çš„èƒ½åŠ›ã€å¯çµæ´»è®¾è®¡é€šä¿¡åè®®ï¼ˆåˆ†å¸§ã€å¤„ç†ç²˜åŒ…ï¼‰çš„èƒ½åŠ›ï¼›å®ƒè¿˜éœ€è¦è¿è¡Œåœ¨
+ç‹¬ç«‹äºŽæ¸¸æˆä¸»çº¿ç¨‹çš„çº¿ç¨‹é‡Œã€ç½‘ç»œäº‹ä»¶ï¼ˆå»ºç«‹ã€å…³é—­ã€å¼‚å¸¸ã€åŒ…åˆ°æ¥ç­‰ï¼‰å‘ç”Ÿæ—¶å›žè°ƒç›‘å¬
+å™¨ã€‚æˆ–è®¸æˆ‘ä»¬è¿˜æœ‰åŒæ­¥çš„éœ€æ±‚å‡å¦‚æˆ‘ä»¬æŠŠæ”¶åˆ°çš„åŒ…æ”¾åˆ°ä¸€ä¸ªå¾…å¤„ç†é˜Ÿåˆ—ï¼ˆqueueï¼‰é‡Œé¢ï¼Œ
+è€Œæ¸¸æˆä¸»çº¿ç¨‹éœ€è¦è®¿é—®è¿™ä¸ªé˜Ÿåˆ—ã€‚
 
-## ½â¾ö·½°¸
+## è§£å†³æ–¹æ¡ˆ
 
-cocosocketÔÚbsd socket»ù´¡ÉÏÊµÏÖÁËÒ»¸ö¼ò½àÓÅÑÅµÄc++µÄapi£¬³ýÁËÏß³Ì¡¢Ïß³Ì³Ø¡¢
-¶ÓÁÐ¡¢Ì×½Ó×Ö£¨socket£©¡¢Ì×½Ó×Ö¼àÌýÆ÷£¨socketlisterner£©Íâ£¬ÖØÒªµÄÊÇ»¹Ìá¹©ÁË
-Ò»ÖÖ×Ô¶¨ÒåÍ¨ÐÅÐ­ÒéµÄapi£¨Protocal£©£¬²¢Ìá¹©ÁËÒ»¸ö»ùÓÚlengthfieldµÄÐ­ÒéÊµÏÖ
-£¨ÍÆ¼öÊ¹ÓÃlengthfield£©£»cocosocketÌá¹©ÁË»ù±¾Êý¾ÝÀàÐÍµÄ¶ÁÐ´api£¬¶øÕâÐ©¶ÁÐ´
-ÊÇ°´ÕÕÍøÂçÁ÷£¨big endian£©Ë³Ðò´¦ÀíµÄ¡£
+cocosocketåœ¨bsd socketåŸºç¡€ä¸Šå®žçŽ°äº†ä¸€ä¸ªç®€æ´ä¼˜é›…çš„c++çš„apiï¼Œé™¤äº†çº¿ç¨‹ã€çº¿ç¨‹æ± ã€
+é˜Ÿåˆ—ã€å¥—æŽ¥å­—ï¼ˆsocketï¼‰ã€å¥—æŽ¥å­—ç›‘å¬å™¨ï¼ˆsocketlisternerï¼‰å¤–ï¼Œé‡è¦çš„æ˜¯è¿˜æä¾›äº†
+ä¸€ç§è‡ªå®šä¹‰é€šä¿¡åè®®çš„apiï¼ˆProtocalï¼‰ï¼Œå¹¶æä¾›äº†ä¸€ä¸ªåŸºäºŽlengthfieldçš„åè®®å®žçŽ°
+ï¼ˆæŽ¨èä½¿ç”¨lengthfieldï¼‰ï¼›cocosocketæä¾›äº†åŸºæœ¬æ•°æ®ç±»åž‹çš„è¯»å†™apiï¼Œè€Œè¿™äº›è¯»å†™
+æ˜¯æŒ‰ç…§ç½‘ç»œæµï¼ˆbig endianï¼‰é¡ºåºå¤„ç†çš„ã€‚
 
-cocosocket»¹ÓµÓÐ¹ØÓÚËø¡¢¶ÓÁÐ¡¢Í¬²½¶ÓÁÐ¡¢Ïß³Ì³ØµÄÊµÏÖ£¬ÕâÐ©ÄÚÈÝÓÐÐ©²»ÊÇ±ØÐëµÄ
-£¬µ«ÎÒÏëÒ²»áÓÐÖúÓÚÀ©Õ¹¹¦ÄÜ¡£
+cocosocketè¿˜æ‹¥æœ‰å…³äºŽé”ã€é˜Ÿåˆ—ã€åŒæ­¥é˜Ÿåˆ—ã€çº¿ç¨‹æ± çš„å®žçŽ°ï¼Œè¿™äº›å†…å®¹æœ‰äº›ä¸æ˜¯å¿…é¡»çš„
+ï¼Œä½†æˆ‘æƒ³ä¹Ÿä¼šæœ‰åŠ©äºŽæ‰©å±•åŠŸèƒ½ã€‚
 
-## Ê¹ÓÃ
+## ä½¿ç”¨
 
-Ê¹ÓÃcocosocketÊÇºÜ¼òµ¥µÄ£¬¿´ÏÂÃæ´úÂë£º
+ä½¿ç”¨cocosocketæ˜¯å¾ˆç®€å•çš„ï¼Œçœ‹ä¸‹é¢ä»£ç ï¼š
 
     Socket* s = new Socket();//1
     SocketListerner* sl = new DefaultListerner();//2
@@ -35,64 +35,64 @@ cocosocket»¹ÓµÓÐ¹ØÓÚËø¡¢¶ÓÁÐ¡¢Í¬²½¶ÓÁÐ¡¢Ïß³Ì³ØµÄÊµÏÖ£¬ÕâÐ©ÄÚÈÝÓÐÐ©²»ÊÇ±ØÐëµÄ
     s->SetProtocal(new LVProtocal());//4
     s->Connect("192.168.1.100", 3333);//5
 
-ÊÇµÄ£¬¾ÍÊÇÕâÃ´Ê¹ÓÃ£¬ÎÒ½«·Ö±ð½éÉÜÕâ¼¸ÐÐ´úÂë¼°Æä±³ºóµÄ»úÖÆ
+æ˜¯çš„ï¼Œå°±æ˜¯è¿™ä¹ˆä½¿ç”¨ï¼Œæˆ‘å°†åˆ†åˆ«ä»‹ç»è¿™å‡ è¡Œä»£ç åŠå…¶èƒŒåŽçš„æœºåˆ¶
 
-1£¬³õÊ¼»¯Ò»¸öSocket¶ÔÏó¡£
+1ï¼Œåˆå§‹åŒ–ä¸€ä¸ªSocketå¯¹è±¡ã€‚
 
-2£¬3£¬Á½ÐÐ³õÊ¼»¯Ò»¸öSocketListerner²¢ÉèÖÃ£¬Õâ¸ölisterner¾ÍÊÇsocket¸÷ÖÖÊÂ¼þµÄ
-µÄ»Øµ÷½Ó¿Ú£¬ÐèÒªÓÃ»§¸ù¾Ý×Ô¼ºµÄÐèÇóÊµÏÖÒ»¸öSocketListerner£¨¼Ì³ÐËü£©£¬Õâ¸ö¼àÌý
-Æ÷»á´¦ÀíÕâ¼¸¸öÊÂ¼þ£ºsocketÁ¬½Ó³É¹¦£¨OnOpen£©¡¢socketÁ¬½Ó¹Ø±Õ£¨OnClose£©¡¢ÏûÏ¢
-µ½À´£¨OnMessage£©¡¢Á¬½Ó³¬Ê±£¨OnIdle£©¡¢Á¬½ÓÒì³££¨OnError£©£»ÕâÐ©·½·¨µÄ»Øµ÷£¬
-ÊÇ¶ÀÁ¢ÓÚÓÎÏ·Ö÷Ïß³ÌµÄ£¬ÒòÎªsocketÔËÐÐÔÚÒ»¸ö¶ÀÁ¢µÄÏß³ÌÀï¡£DefaultListerner½ö½ö
-ÊÇbeykeryÓÃÀ´²âÊÔµÄ£¬Ê¹ÓÃcocosocketµÄÊ±ºò£¬ÐèÒªÄã×Ô¼º¶¨ÖÆ×Ô¼ºµÄlisterner¡£
+2ï¼Œ3ï¼Œä¸¤è¡Œåˆå§‹åŒ–ä¸€ä¸ªSocketListernerå¹¶è®¾ç½®ï¼Œè¿™ä¸ªlisternerå°±æ˜¯socketå„ç§äº‹ä»¶çš„
+çš„å›žè°ƒæŽ¥å£ï¼Œéœ€è¦ç”¨æˆ·æ ¹æ®è‡ªå·±çš„éœ€æ±‚å®žçŽ°ä¸€ä¸ªSocketListernerï¼ˆç»§æ‰¿å®ƒï¼‰ï¼Œè¿™ä¸ªç›‘å¬
+å™¨ä¼šå¤„ç†è¿™å‡ ä¸ªäº‹ä»¶ï¼šsocketè¿žæŽ¥æˆåŠŸï¼ˆOnOpenï¼‰ã€socketè¿žæŽ¥å…³é—­ï¼ˆOnCloseï¼‰ã€æ¶ˆæ¯
+åˆ°æ¥ï¼ˆOnMessageï¼‰ã€è¿žæŽ¥è¶…æ—¶ï¼ˆOnIdleï¼‰ã€è¿žæŽ¥å¼‚å¸¸ï¼ˆOnErrorï¼‰ï¼›è¿™äº›æ–¹æ³•çš„å›žè°ƒï¼Œ
+æ˜¯ç‹¬ç«‹äºŽæ¸¸æˆä¸»çº¿ç¨‹çš„ï¼Œå› ä¸ºsocketè¿è¡Œåœ¨ä¸€ä¸ªç‹¬ç«‹çš„çº¿ç¨‹é‡Œã€‚DefaultListernerä»…ä»…
+æ˜¯beykeryç”¨æ¥æµ‹è¯•çš„ï¼Œä½¿ç”¨cocosocketçš„æ—¶å€™ï¼Œéœ€è¦ä½ è‡ªå·±å®šåˆ¶è‡ªå·±çš„listernerã€‚
 
-4£¬³õÊ¼»¯Ò»¸öProtocal²¢ÉèÖÃÎªsocketµÄ·ÖÖ¡Ð­Òé¡£·ÖÖ¡ÊÇÕâÑùµÄ£¬ÓÉÓÚ·¢ËÍ·½£¨·þÎñ
-Æ÷£©·¢ËÍµÄÏûÏ¢ÊÇÒ»¸ö²»¼ä¶ÏµÄÁ÷£¬Òò´ËÎÒÃÇÐèÒª´ÓÕâ¸öÁ÷ÀïÃæ·ÖÎö³öÒ»¸ö¸öÖ¡£¨´ú±í
-Ä³ÖÖÂß¼­ÒâÒå£©³öÀ´£¬»»¾ä»°Ëµ£¬¾ÍÊÇÎÒÃÇÒªÕÒµ½Ã¿Ò»Ö¡µÄÆðÊ¼ºÍÖÕÖ¹Î»ÖÃ²¢ÌáÈ¡³öÀ´
-¡£¾Ù¸öÀý×Ó£º·þÎñÆ÷·¢ËÍÁ½Ö¡Êý¾Ý¹ýÀ´,ABºÍCD£¬¿Í»§¶Ë½ÓÊÕµÄÇé¿ö¾ÍºÜ¸´ÔÓ£¬ÓÐ¿ÉÄÜÊÇ
-ÏÈÊÕµ½A£¬È»ºóÊÕµ½BCD£»Ò²ÓÐ¿ÉÄÜÊÇÏÈÊÕµ½A£¬È»ºóÊÕµ½B£¬×îºóÊÕµ½CD£»µÈµÈµÈµÈ¸´ÔÓ
-Çé¿ö£¬ÏÔÈ»£¬ÎÒÃÇµÄÂß¼­ÒªÇóABÊÇÒ»¸öÂß¼­µ¥Î»£¨Ö¡£©£¬CDÊÇÒ»¸öÂß¼­µ¥Î»£¬Èç¹û°´ÕÕ
-Ã¿´ÎÊÕµ½µÄÐÅÏ¢×÷ÎªÒ»Ö¡£¬ÔòÎÞ·¨´¦ÀíÒµÎñÂß¼­¡£
+4ï¼Œåˆå§‹åŒ–ä¸€ä¸ªProtocalå¹¶è®¾ç½®ä¸ºsocketçš„åˆ†å¸§åè®®ã€‚åˆ†å¸§æ˜¯è¿™æ ·çš„ï¼Œç”±äºŽå‘é€æ–¹ï¼ˆæœåŠ¡
+å™¨ï¼‰å‘é€çš„æ¶ˆæ¯æ˜¯ä¸€ä¸ªä¸é—´æ–­çš„æµï¼Œå› æ­¤æˆ‘ä»¬éœ€è¦ä»Žè¿™ä¸ªæµé‡Œé¢åˆ†æžå‡ºä¸€ä¸ªä¸ªå¸§ï¼ˆä»£è¡¨
+æŸç§é€»è¾‘æ„ä¹‰ï¼‰å‡ºæ¥ï¼Œæ¢å¥è¯è¯´ï¼Œå°±æ˜¯æˆ‘ä»¬è¦æ‰¾åˆ°æ¯ä¸€å¸§çš„èµ·å§‹å’Œç»ˆæ­¢ä½ç½®å¹¶æå–å‡ºæ¥
+ã€‚ä¸¾ä¸ªä¾‹å­ï¼šæœåŠ¡å™¨å‘é€ä¸¤å¸§æ•°æ®è¿‡æ¥,ABå’ŒCDï¼Œå®¢æˆ·ç«¯æŽ¥æ”¶çš„æƒ…å†µå°±å¾ˆå¤æ‚ï¼Œæœ‰å¯èƒ½æ˜¯
+å…ˆæ”¶åˆ°Aï¼Œç„¶åŽæ”¶åˆ°BCDï¼›ä¹Ÿæœ‰å¯èƒ½æ˜¯å…ˆæ”¶åˆ°Aï¼Œç„¶åŽæ”¶åˆ°Bï¼Œæœ€åŽæ”¶åˆ°CDï¼›ç­‰ç­‰ç­‰ç­‰å¤æ‚
+æƒ…å†µï¼Œæ˜¾ç„¶ï¼Œæˆ‘ä»¬çš„é€»è¾‘è¦æ±‚ABæ˜¯ä¸€ä¸ªé€»è¾‘å•ä½ï¼ˆå¸§ï¼‰ï¼ŒCDæ˜¯ä¸€ä¸ªé€»è¾‘å•ä½ï¼Œå¦‚æžœæŒ‰ç…§
+æ¯æ¬¡æ”¶åˆ°çš„ä¿¡æ¯ä½œä¸ºä¸€å¸§ï¼Œåˆ™æ— æ³•å¤„ç†ä¸šåŠ¡é€»è¾‘ã€‚
 
-½ÓÏÂÀ´¿´¿´LVProtocal£¬Õâ¸öÀà¼Ì³ÐÁËProtocal£¬ËüÊµÏÖµÄ·ÖÖ¡Âß¼­ÊÇÕâÑùµÄ£ºÏÈ¶ÁÈ¡
-Á½¸ö×Ö½Ú£¬×éºÏÎªÒ»¸öÁ½×Ö½ÚÕûÊýx£¬½ÓÏÂÀ´»á¶ÁÈëx×Ö½ÚµÄÊý¾Ý£¬Èç¹ûµ±Ç°Êý¾Ý½ÏÉÙ£¬
-ÔòÓÐ¶àÉÙ¶ÁÈë¶àÉÙ£»·ñÔò¶ÁÈëx×Ö½Ú¡£¶ÁÍêÕûx×Ö½Úºó£¬ÔòÒ»Ö¡Êý¾Ý¶ÁÍê£¬Ö®ºóSocketListerner
-µÄOnMessage½«»á±»µ÷ÓÃ¡£
+æŽ¥ä¸‹æ¥çœ‹çœ‹LVProtocalï¼Œè¿™ä¸ªç±»ç»§æ‰¿äº†Protocalï¼Œå®ƒå®žçŽ°çš„åˆ†å¸§é€»è¾‘æ˜¯è¿™æ ·çš„ï¼šå…ˆè¯»å–
+ä¸¤ä¸ªå­—èŠ‚ï¼Œç»„åˆä¸ºä¸€ä¸ªä¸¤å­—èŠ‚æ•´æ•°xï¼ŒæŽ¥ä¸‹æ¥ä¼šè¯»å…¥xå­—èŠ‚çš„æ•°æ®ï¼Œå¦‚æžœå½“å‰æ•°æ®è¾ƒå°‘ï¼Œ
+åˆ™æœ‰å¤šå°‘è¯»å…¥å¤šå°‘ï¼›å¦åˆ™è¯»å…¥xå­—èŠ‚ã€‚è¯»å®Œæ•´xå­—èŠ‚åŽï¼Œåˆ™ä¸€å¸§æ•°æ®è¯»å®Œï¼Œä¹‹åŽSocketListerner
+çš„OnMessageå°†ä¼šè¢«è°ƒç”¨ã€‚
 
-Èç¹ûÄãÏëÒªÊ¹ÓÃ²»Í¬µÄ·ÖÖ¡Âß¼­£¬ÔòÐèÒª×Ô¼ºÊµÏÖÒ»¸öProtocal¡£½¨ÒéÊ¹ÓÃLVProtocal
-£¬ÒòÎªÕâ¸öÖ»ÊÇ·ÖÖ¡µÄÂß¼­£¬·ÖÍêÖ¡ÒÔºó£¬Ò²¾ÍÊÇ·Ö³öÀ´µÄx×Ö½Ú£¬ËüµÄÄÚÈÝ£¬¾ÍÊÇÎÒÃÇ
-µÄÒµÎñÐ­ÒéµÄÄÚÈÝÁË£¬¿ÉÄÜÊÇÒ»¸ö×Ö·û´®£¬»òÕß°´ÕÕÄ³ÖÖÌØ¶¨Ë³Ðò×éÖ¯µÄ£¨±ÈÈçÏÈÁ½¸ö
-×Ö½ÚµÄÕûÐÍ´ú±íÐ­ÒéºÅ£¬È»ºó°Ë¸ö×Ö½ÚÊÇÒ»¸ö³¤ÕûÐÎ±íÊ¾ÓÃ»§µÄid£¬È»ºó¡£¡£¡££©£¬µ±
-È»Ò²ÓÐ¿ÉÄÜÕâx¸ö×Ö½ÚÊÇ¾­¹ýÄ³¸ö¼ÓÃÜËã·¨¼ÓÃÜ¹ýµÄ£¬ÄÇÃ´ÐèÒª½âÃÜºóÔÙ°´ÕÕÒµÎñÐ­ÒéÀ´½ø
-ÐÐ½âÎö¡£
+å¦‚æžœä½ æƒ³è¦ä½¿ç”¨ä¸åŒçš„åˆ†å¸§é€»è¾‘ï¼Œåˆ™éœ€è¦è‡ªå·±å®žçŽ°ä¸€ä¸ªProtocalã€‚å»ºè®®ä½¿ç”¨LVProtocal
+ï¼Œå› ä¸ºè¿™ä¸ªåªæ˜¯åˆ†å¸§çš„é€»è¾‘ï¼Œåˆ†å®Œå¸§ä»¥åŽï¼Œä¹Ÿå°±æ˜¯åˆ†å‡ºæ¥çš„xå­—èŠ‚ï¼Œå®ƒçš„å†…å®¹ï¼Œå°±æ˜¯æˆ‘ä»¬
+çš„ä¸šåŠ¡åè®®çš„å†…å®¹äº†ï¼Œå¯èƒ½æ˜¯ä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œæˆ–è€…æŒ‰ç…§æŸç§ç‰¹å®šé¡ºåºç»„ç»‡çš„ï¼ˆæ¯”å¦‚å…ˆä¸¤ä¸ª
+å­—èŠ‚çš„æ•´åž‹ä»£è¡¨åè®®å·ï¼Œç„¶åŽå…«ä¸ªå­—èŠ‚æ˜¯ä¸€ä¸ªé•¿æ•´å½¢è¡¨ç¤ºç”¨æˆ·çš„idï¼Œç„¶åŽã€‚ã€‚ã€‚ï¼‰ï¼Œå½“
+ç„¶ä¹Ÿæœ‰å¯èƒ½è¿™xä¸ªå­—èŠ‚æ˜¯ç»è¿‡æŸä¸ªåŠ å¯†ç®—æ³•åŠ å¯†è¿‡çš„ï¼Œé‚£ä¹ˆéœ€è¦è§£å¯†åŽå†æŒ‰ç…§ä¸šåŠ¡åè®®æ¥è¿›
+è¡Œè§£æžã€‚
 
-5£¬Á¬½Ó·þÎñÆ÷£¬ÐèÒªÖ¸¶¨·þÎñÆ÷ipµØÖ·ºÍ¶Ë¿Ú£¬Èç¹ûÁ¬½Ó³É¹¦£¬ÔòSocketListernerµÄ
-OnOpenº¯Êý»á±»µ÷ÓÃ£¬Èç¹ûÊ§°ÜOnClose½«±»µ÷ÓÃ¡£
+5ï¼Œè¿žæŽ¥æœåŠ¡å™¨ï¼Œéœ€è¦æŒ‡å®šæœåŠ¡å™¨ipåœ°å€å’Œç«¯å£ï¼Œå¦‚æžœè¿žæŽ¥æˆåŠŸï¼Œåˆ™SocketListernerçš„
+OnOpenå‡½æ•°ä¼šè¢«è°ƒç”¨ï¼Œå¦‚æžœå¤±è´¥OnCloseå°†è¢«è°ƒç”¨ã€‚
 
-##¹ØÓÚcocosocket-server
+##å…³äºŽcocosocket-server
 
-server²¿·ÖÊÇÒ»¸öjava³ÌÐò£¬Æäµ×²ãÒÀÀµÓÚnetty£¬nettyÊÇÒ»¸öÕæÕý¸ßÐÔÄÜµÄÍ¨ÐÅ¿ò¼Ü
-£¬cocosocket-serverÒþ²ØÁËÐí¶ànettyµÄ¸´ÔÓÐÔ£¨netty²»½ö½öÓÃÓÚtcp/ipÐ­ÒéµÄÍ¨ÐÅ£©
-£¬Èç¹û¸úcocosocket-client×÷¶Ô±ÈÄã»á·¢ÏÖ£¬ËûÃÇµÄapiºÜÏàËÆ£¬ÕâÔÚÄ³ÖÖ³Ì¶ÈÉÏ¼ò»¯
-ÁËÀí½âÕâÁ½ÕßµÄÄÑ¶È£¬Äã¿ÉÒÔ´Óserver¶Ë»òclient¶ËÈëÊÖ£¬Õâ½«·Ç³£ÓÐÖúÓÚÀí½âÁíÒ»¶Ë
-¡£×ø±ê£º
+serveréƒ¨åˆ†æ˜¯ä¸€ä¸ªjavaç¨‹åºï¼Œå…¶åº•å±‚ä¾èµ–äºŽnettyï¼Œnettyæ˜¯ä¸€ä¸ªçœŸæ­£é«˜æ€§èƒ½çš„é€šä¿¡æ¡†æž¶
+ï¼Œcocosocket-serveréšè—äº†è®¸å¤šnettyçš„å¤æ‚æ€§ï¼ˆnettyä¸ä»…ä»…ç”¨äºŽtcp/ipåè®®çš„é€šä¿¡ï¼‰
+ï¼Œå¦‚æžœè·Ÿcocosocket-clientä½œå¯¹æ¯”ä½ ä¼šå‘çŽ°ï¼Œä»–ä»¬çš„apiå¾ˆç›¸ä¼¼ï¼Œè¿™åœ¨æŸç§ç¨‹åº¦ä¸Šç®€åŒ–
+äº†ç†è§£è¿™ä¸¤è€…çš„éš¾åº¦ï¼Œä½ å¯ä»¥ä»Žserverç«¯æˆ–clientç«¯å…¥æ‰‹ï¼Œè¿™å°†éžå¸¸æœ‰åŠ©äºŽç†è§£å¦ä¸€ç«¯
+ã€‚åæ ‡ï¼š
 ```xml
   <dependency>
       <groupId>org.beykery</groupId>
       <artifactId>cocosocket</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.4</version>
   </dependency>
 ```
-##¹ØÓÚcocosocket4unity
+##å…³äºŽcocosocket4unity
 
-Õâ¸ö³ÌÐòÊÇÎªunity 3D×¼±¸µÄ£¬apiºÍc++°æ±¾µÄ¿Í»§¶ËºÜÏñ£¬ÊµÏÖµÄÊÇÏàÍ¬µÄ¹¦ÄÜ£¬ÊÊÓÃ
-ÓÚunity 3DÍøÓÎ¡£ÀïÃæÎÒÇ¶ÈëÁËlitjsonµÄ´úÂëÓÃ²¢ÐÞ¸´ÁËËüµÄÒ»¸öbug£ºutf8×Ö·û´®ÂÒÂë
-£¬Èç¹ûÄã¸ÕºÃÐèÒªjson½âÎö£¬ÄÇÃ´½¨ÒéÊ¹ÓÃ£¬·ñÔòÇëÉ¾È¥litjsonµÄ´úÂë¼´¿É¡£
+è¿™ä¸ªç¨‹åºæ˜¯ä¸ºunity 3Då‡†å¤‡çš„ï¼Œapiå’Œc++ç‰ˆæœ¬çš„å®¢æˆ·ç«¯å¾ˆåƒï¼Œå®žçŽ°çš„æ˜¯ç›¸åŒçš„åŠŸèƒ½ï¼Œé€‚ç”¨
+äºŽunity 3Dç½‘æ¸¸ã€‚é‡Œé¢æˆ‘åµŒå…¥äº†litjsonçš„ä»£ç ç”¨å¹¶ä¿®å¤äº†å®ƒçš„ä¸€ä¸ªbugï¼šutf8å­—ç¬¦ä¸²ä¹±ç 
+ï¼Œå¦‚æžœä½ åˆšå¥½éœ€è¦jsonè§£æžï¼Œé‚£ä¹ˆå»ºè®®ä½¿ç”¨ï¼Œå¦åˆ™è¯·åˆ åŽ»litjsonçš„ä»£ç å³å¯ã€‚
 
 
-## ½áÓï
+## ç»“è¯­
 
-ok£¬ÄÇÃ´ÎÒÏëÄãÏÖÔÚÓ¦¸Ã¶ÔcocosocketÓÐ¸ö´ó¸ÅÁË½âÁË¡£enjoy it.
+okï¼Œé‚£ä¹ˆæˆ‘æƒ³ä½ çŽ°åœ¨åº”è¯¥å¯¹cocosocketæœ‰ä¸ªå¤§æ¦‚äº†è§£äº†ã€‚enjoy it.
 
 	
 	
