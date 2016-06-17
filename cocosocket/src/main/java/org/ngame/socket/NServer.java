@@ -66,7 +66,7 @@ public abstract class NServer extends NListener
     {
       MAX_THREAD_SELECTOR = Integer.parseInt(System.getProperty("game.socket.server.thread.selector"));
       MAX_THREAD_IO = Integer.parseInt(System.getProperty("game.socket.server.thread.io"));
-      linux = System.getProperty("os", "win").contains("linux");
+      linux = System.getProperty("os.name", "win").contains("linux");
       maxCount = Integer.parseInt(System.getProperty("game.socket.server.busy.maxCount", "0"));
       interval = Integer.parseInt(System.getProperty("game.socket.server.busy.interval", "0"));
     } catch (Exception e)
@@ -215,7 +215,7 @@ public abstract class NServer extends NListener
                   }
                   s.setNetwork(NServer.this.network);
                   ch.pipeline().addLast(s);
-                  if (maxCount > 0)
+                  if (maxCount > 0 && interval > 0)
                   {
                     s.busy(maxCount, interval);
                   }

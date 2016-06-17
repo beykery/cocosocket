@@ -33,7 +33,7 @@ public abstract class SocketClient extends NListener
 
     static
     {
-        linux = System.getProperty("os", "win").contains("linux");
+        linux = System.getProperty("os.name", "win").contains("linux");
     }
 
     /**

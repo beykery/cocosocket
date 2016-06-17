@@ -99,12 +99,19 @@ namespace cocosocket4unity
          */
         public void Close(bool serverClose=false)
         {
-            if (clientSocket != null && clientSocket.Connected)
+            try
             {
-                clientSocket.Shutdown(SocketShutdown.Both);
-                clientSocket.Close();
-                this.status = STATUS_CLOSED;
-                this.serverClose = serverClose;
+                if (clientSocket != null && clientSocket.Connected)
+                {
+                    clientSocket.Shutdown(SocketShutdown.Both);
+                    clientSocket.Close();
+                    this.status = STATUS_CLOSED;
+                    this.serverClose = serverClose;
+                }
+            }
+            catch (Exception e)
+            {
+
             }
         }
         /**

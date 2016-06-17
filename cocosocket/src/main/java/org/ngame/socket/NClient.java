@@ -119,15 +119,13 @@ public final class NClient extends ChannelInboundHandlerAdapter
             ctx.channel().close();
           }
         } else//服务器
-        {
-          if (msg instanceof FullHttpRequest)
+         if (msg instanceof FullHttpRequest)
           {
             handleHttpRequest(ctx, (FullHttpRequest) msg);
           } else if (msg instanceof WebSocketFrame)
           {
             handleWebSocketFrame(ctx, (WebSocketFrame) msg);
           }
-        }
         break;
       case NServer.NETWORK_HTTP:
         if (msg instanceof DefaultFullHttpRequest)//server

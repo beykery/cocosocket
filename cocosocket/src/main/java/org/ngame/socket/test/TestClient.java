@@ -14,7 +14,8 @@ import org.ngame.socket.SocketClient;
 import org.ngame.socket.framing.Varint32Framedata;
 import org.ngame.socket.protocol.Protocol;
 import org.ngame.socket.protocol.Varint32HeaderProtocol;
-
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.PooledByteBufAllocator;
 /**
  *
  * @author beykery
@@ -96,8 +97,10 @@ public class TestClient extends SocketClient
    */
   public static void main(String... args)
   {
-    TestClient tc = new TestClient(new InetSocketAddress(1106), new Varint32HeaderProtocol());
-    tc.connect();
+   ByteBuf bb= PooledByteBufAllocator.DEFAULT.buffer(1);
+//    TestClient tc = new TestClient(new InetSocketAddress(1106), new Varint32HeaderProtocol());
+//    tc.connect();
+System.out.println(bb);
   }
 
   @Override
