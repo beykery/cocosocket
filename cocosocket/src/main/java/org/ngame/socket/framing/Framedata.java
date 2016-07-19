@@ -20,11 +20,10 @@ public class Framedata
   protected boolean end;//是否封包
 
   /**
-   * 默认初始容量100
+   * 默认不再构造内容
    */
-  public Framedata()
+  protected Framedata()
   {
-    this(100);
   }
 
   /**

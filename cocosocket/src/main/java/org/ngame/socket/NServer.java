@@ -194,6 +194,7 @@ public abstract class NServer extends NListener
                 {
                   final ChannelPipeline pipeline = ch.pipeline();
                   ch.config().setAllocator(PooledByteBufAllocator.DEFAULT);
+                  ch.config().setOption(ChannelOption.TCP_NODELAY, true);
                   final Protocol p = pClass.newInstance();
                   final NClient s = new NClient(NServer.this, ch, p);
                   p.setContext(s);
