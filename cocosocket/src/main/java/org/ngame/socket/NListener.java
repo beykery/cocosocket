@@ -1,9 +1,9 @@
 package org.ngame.socket;
 
 import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * 数据来往监听器
@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public abstract class NListener
 {
 
-  private static final Logger LOG = Logger.getLogger(NListener.class.getName());
+  private static final InternalLogger LOG =InternalLoggerFactory.getInstance(NListener.class);
   int max_connection = Integer.MAX_VALUE;
   AtomicInteger cur_connection = new AtomicInteger(0);
 
@@ -39,7 +39,7 @@ public abstract class NListener
       max_connection = Integer.parseInt(System.getProperty("game.connections"));
     } catch (Exception e)
     {
-      LOG.log(Level.WARNING, "配置最大连接数失败");
+      LOG.warn("配置最大连接数失败");
     }
   }
 

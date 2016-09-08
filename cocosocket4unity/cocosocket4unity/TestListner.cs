@@ -15,6 +15,7 @@ namespace cocosocket4unity
 
 		public override  void OnMessage(USocket us,ByteBuf bb)
 		{
+           
 			Console.WriteLine ("收到数据:");
 			bb.ReaderIndex (us.getProtocal().HeaderLen());
 
@@ -22,6 +23,7 @@ namespace cocosocket4unity
             Type t=null;
             MemoryStream stream = new MemoryStream(bb.GetRaw(),bb.ReaderIndex(),bb.ReadableBytes());
             object response=ProtoBuf.Serializer.NonGeneric.Deserialize(t,stream);
+            
             /**
 			Console.WriteLine (response.pid);
             Console.WriteLine(response.info);
@@ -41,6 +43,7 @@ namespace cocosocket4unity
 		}
 		public override  void OnOpen(USocket us)
 		{
+          
 			Console.WriteLine ("连接建立");
             AuthRequest request = new AuthRequest();
             request.loginid = "lkjlkj;sdf你好";
@@ -53,6 +56,7 @@ namespace cocosocket4unity
             f.PutBytes(stream.ToArray());
             f.End();
 			us.Send (f);
+          
 		}
 		public override  void OnError(USocket us,string err)
 		{

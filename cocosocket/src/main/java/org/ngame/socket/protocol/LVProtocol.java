@@ -4,9 +4,10 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.util.ReferenceCountUtil;
 import io.netty.util.internal.PlatformDependent;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 import org.ngame.socket.exeptions.LimitExedeedException;
 import java.nio.ByteOrder;
-import java.util.logging.Logger;
 
 /**
  * 字节流协议的实现
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
 public class LVProtocol extends Protocol
 {
 
-  private static final Logger LOG = Logger.getLogger(LVProtocol.class.getName());
+  private static final InternalLogger LOG =InternalLoggerFactory.getInstance(LVProtocol.class);
   private ByteBuf incompleteframe;//尚未完成的帧
   private byte h, l;//高低字节用来记录长度
   private byte status;//当前状态

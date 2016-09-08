@@ -12,7 +12,7 @@ namespace cocosocket4unity
 {
 	class MainClass
 	{
-		public static void Main (string[] args)
+		public static void Main1 (string[] args)
 		{
             
             AuthRequest ar = new AuthRequest();

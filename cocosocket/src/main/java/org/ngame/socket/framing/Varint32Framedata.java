@@ -5,7 +5,8 @@ package org.ngame.socket.framing;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
-import java.util.logging.Logger;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 import org.ngame.socket.protocol.Protocol;
 import org.ngame.socket.util.CodedOutputStream;
 
@@ -16,7 +17,7 @@ import org.ngame.socket.util.CodedOutputStream;
 public class Varint32Framedata extends Framedata
 {
 
-  private static final Logger LOG = Logger.getLogger(Varint32Framedata.class.getName());
+  private static final InternalLogger LOG =InternalLoggerFactory.getInstance(Varint32Framedata.class);
 
   public Varint32Framedata(int l)
   {
@@ -93,7 +94,7 @@ public class Varint32Framedata extends Framedata
       return tar;
     } catch (Exception e)
     {
-      LOG.severe("写入varint32" + v + "失败");
+      LOG.error("写入varint32" + v + "失败");
       return null;
     }
   }

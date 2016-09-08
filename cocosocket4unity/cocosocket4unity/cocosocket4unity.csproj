@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\..\..\software\protobuf-net.dll</HintPath>
+      <HintPath>..\..\..\..\..\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.XML" />
@@ -42,10 +42,14 @@
     <Compile Include="AuthRequest.cs" />
     <Compile Include="AuthResponse.cs" />
     <Compile Include="ClassUtil.cs" />
+    <Compile Include="Kcp.cs" />
+    <Compile Include="KcpClient.cs" />
+    <Compile Include="KcpOnUdp.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ByteBuf.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="Output.cs" />
     <Compile Include="ProtoAttribute.cs" />
     <Compile Include="Protocal.cs" />
     <Compile Include="LVProtocal.cs" />

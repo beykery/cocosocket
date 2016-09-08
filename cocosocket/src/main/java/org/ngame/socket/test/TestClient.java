@@ -3,7 +3,6 @@
  */
 package org.ngame.socket.test;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.handler.timeout.IdleStateEvent;
 import java.net.InetSocketAddress;
@@ -13,7 +12,6 @@ import org.ngame.socket.NClient;
 import org.ngame.socket.SocketClient;
 import org.ngame.socket.framing.Varint32Framedata;
 import org.ngame.socket.protocol.Protocol;
-import org.ngame.socket.protocol.Varint32HeaderProtocol;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 /**

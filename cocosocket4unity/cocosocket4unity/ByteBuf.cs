@@ -27,7 +27,15 @@ namespace cocosocket4unity
 			markReader = 0;
 			markWriter = 0;
 		}
-
+        public ByteBuf(byte[] content)
+        {
+            this.len = content.Length;
+            this.data = content;
+            readerIndex = 0;
+            writerIndex = len;
+            markReader = 0;
+            markWriter = 0;
+        }
 		/**
 		 *  容量
 		 **/

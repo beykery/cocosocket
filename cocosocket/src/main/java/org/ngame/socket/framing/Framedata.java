@@ -2,9 +2,9 @@ package org.ngame.socket.framing;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 import java.io.UnsupportedEncodingException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.ngame.socket.protocol.Protocol;
 
 /**
@@ -15,7 +15,7 @@ import org.ngame.socket.protocol.Protocol;
 public class Framedata
 {
 
-  private static final Logger LOG = Logger.getLogger(Framedata.class.getName());
+  private static final InternalLogger LOG =InternalLoggerFactory.getInstance(Framedata.class);
   protected ByteBuf payload;//帧内容
   protected boolean end;//是否封包
 
@@ -190,7 +190,7 @@ public class Framedata
         payload.writeBytes(b);
       } catch (UnsupportedEncodingException e)
       {
-        LOG.log(Level.SEVERE, "编码错误：" + encode);
+        LOG.warn("编码错误：" + encode);
       }
     }
     return this;
@@ -216,7 +216,7 @@ public class Framedata
         payload.writeBytes(b);
       } catch (UnsupportedEncodingException e)
       {
-        LOG.log(Level.SEVERE, "编码错误：" + encode);
+        LOG.warn("编码错误：" + encode);
       }
     }
     return this;

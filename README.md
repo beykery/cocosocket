@@ -28,13 +28,13 @@ cocosocket还拥有关于锁、队列、同步队列、线程池的实现，这�
 ## 使用
 
 使用cocosocket是很简单的，看下面代码：
-
+```java
     Socket* s = new Socket();//1
     SocketListerner* sl = new DefaultListerner();//2
     s->SetListerner(sl); //3
     s->SetProtocal(new LVProtocal());//4
     s->Connect("192.168.1.100", 3333);//5
-
+```
 是的，就是这么使用，我将分别介绍这几行代码及其背后的机制
 
 1，初始化一个Socket对象。
@@ -80,7 +80,7 @@ server部分是一个java程序，其底层依赖于netty，netty是一个真正
   <dependency>
       <groupId>org.beykery</groupId>
       <artifactId>cocosocket</artifactId>
-      <version>1.0.8</version>
+      <version>1.0.6</version>
   </dependency>
 ```
 ##关于cocosocket4unity

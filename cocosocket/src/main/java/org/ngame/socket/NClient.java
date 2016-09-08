@@ -19,10 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_LENGTH;
-import static io.netty.handler.codec.http.HttpHeaders.Names.HOST;
-import static io.netty.handler.codec.http.HttpHeaders.isKeepAlive;
 import static io.netty.handler.codec.http.HttpMethod.GET;
 import static io.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
 import static io.netty.handler.codec.http.HttpResponseStatus.FORBIDDEN;
@@ -38,6 +34,8 @@ import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.handler.codec.http.websocketx.WebSocketVersion;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 import java.net.SocketAddress;
 import java.net.URI;
 
@@ -47,7 +45,7 @@ import java.net.URI;
 public final class NClient extends ChannelInboundHandlerAdapter
 {
 
-  private static final Logger LOG = Logger.getLogger(NClient.class.getName());
+  private static final InternalLogger LOG =InternalLoggerFactory.getInstance(NClient.class);
   private NListener listener;
   private final Channel channel;
   private boolean closeReason;//是否为服务器主动关闭
@@ -56,7 +54,6 @@ public final class NClient extends ChannelInboundHandlerAdapter
   private Map<String, Object> sessions;
   private ChannelHandlerContext context;
   private String closeReasonString;//断开原因描述
-  private boolean keepAlive;//是否keepalive
   private boolean client;//是否为http客户端
   private String uri;//服务器地址
   private int network;//http,websocket,socket,local
@@ -131,7 +128,6 @@ public final class NClient extends ChannelInboundHandlerAdapter
         if (msg instanceof DefaultFullHttpRequest)//server
         {
           DefaultFullHttpRequest req = (DefaultFullHttpRequest) msg;
-          this.keepAlive = isKeepAlive(req);
           bb = req.content();
         } else if (msg instanceof HttpContent)//client
         {
@@ -242,12 +238,12 @@ public final class NClient extends ChannelInboundHandlerAdapter
         if (!client)//服务器回送
         {
           HttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, OK, bb);
-          res.headers().set(CONTENT_LENGTH, bb.readableBytes());
+          res.headers().set(HttpHeaderNames.CONTENT_LENGTH, bb.readableBytes());
           return this.context.writeAndFlush(res);
         } else//客户端的request请求
         {
           DefaultFullHttpRequest request = new DefaultFullHttpRequest(HTTP_1_1, HttpMethod.POST, uri, bb);
-          request.headers().set(CONTENT_LENGTH, bb.readableBytes());
+          request.headers().set(HttpHeaderNames.CONTENT_LENGTH, bb.readableBytes());
           return this.channel.writeAndFlush(request);
         }
       default:
@@ -546,12 +542,12 @@ public final class NClient extends ChannelInboundHandlerAdapter
    */
   private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req)
   {
-    if (!req.getDecoderResult().isSuccess())
+    if (!req.decoderResult().isSuccess())
     {
       sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
       return;
     }
-    if (req.getMethod() != GET)
+    if (req.method() != GET)
     {
       sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN));
       return;
@@ -577,13 +573,13 @@ public final class NClient extends ChannelInboundHandlerAdapter
    */
   private void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, DefaultFullHttpResponse res)
   {
-    if (res.getStatus().code() != 200)
+    if (res.status().code() != 200)
     {
-      res.content().writeBytes(res.getStatus().toString().getBytes());
-      HttpHeaders.setContentLength(res, res.content().readableBytes());
+      res.content().writeBytes(res.status().toString().getBytes());
+      HttpUtil.setContentLength(res, res.content().readableBytes());
     }
     ChannelFuture f = ctx.channel().writeAndFlush(res);
-    if (!HttpHeaders.isKeepAlive(req) || res.getStatus().code() != 200)
+    if (!HttpUtil.isKeepAlive(req) || res.status().code() != 200)
     {
       f.addListener(ChannelFutureListener.CLOSE);
     }
@@ -591,7 +587,7 @@ public final class NClient extends ChannelInboundHandlerAdapter
 
   private static String getWebSocketLocation(FullHttpRequest req)
   {
-    String location = req.headers().get(HOST);
+    String location = req.headers().get(HttpHeaderNames.HOST);
     return "ws://" + location;
   }
 

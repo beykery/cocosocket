@@ -9,8 +9,9 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.local.LocalAddress;
 import io.netty.channel.local.LocalChannel;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 import java.net.InetSocketAddress;
-import java.util.logging.Logger;
 
 /**
  * 本地客户端，用来连接本地服务器
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 public abstract class LocalClient extends NListener
 {
 
-	private static final Logger LOG = Logger.getLogger(LocalClient.class.getName());
+	private static final InternalLogger LOG =InternalLoggerFactory.getInstance(LocalClient.class);
 	private InetSocketAddress address;
 	private NClient conn;
 	private EventLoopGroup group;

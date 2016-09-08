@@ -7,12 +7,14 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.epoll.Epoll;
 import io.netty.channel.epoll.EpollSocketChannel;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 import java.net.InetSocketAddress;
 import java.nio.channels.NotYetConnectedException;
-import java.util.logging.Logger;
 import org.ngame.socket.framing.Framedata;
 import org.ngame.socket.protocol.Protocol;
 
@@ -24,16 +26,16 @@ import org.ngame.socket.protocol.Protocol;
 public abstract class SocketClient extends NListener
 {
 
-    private static final Logger LOG = Logger.getLogger(SocketClient.class.getName());
+    private static final InternalLogger LOG =InternalLoggerFactory.getInstance(SocketClient.class);
     private InetSocketAddress address;
     private NClient conn;
     private Protocol protocol;
     private EventLoopGroup group;
-    protected static boolean linux;
+    protected static boolean epoll;
 
     static
     {
-        linux = System.getProperty("os.name", "win").contains("linux");
+        epoll = Epoll.isAvailable();
     }
 
     /**
@@ -141,6 +143,14 @@ public abstract class SocketClient extends NListener
     {
         return conn != null && conn.isOpen();
     }
+/**
+ * epoll
+ * @return 
+ */
+  public static boolean isEpoll()
+  {
+    return epoll;
+  }
 
     /**
      * 链接
@@ -151,7 +161,7 @@ public abstract class SocketClient extends NListener
     private ChannelFuture tryToConnect(final InetSocketAddress remote) throws InterruptedException
     {
         final Class<? extends SocketChannel> c;
-        c = linux ? EpollSocketChannel.class : NioSocketChannel.class;
+        c = epoll ? EpollSocketChannel.class : NioSocketChannel.class;
         Bootstrap b = new Bootstrap();
         b.group(group)
             .channel(c)
