@@ -8,7 +8,6 @@ namespace cocosocket4unity
 {
 	public class ByteBuf
 	{
-		private int len;
 		private byte[] data;
 		private int readerIndex;
 		private int writerIndex;
@@ -20,8 +19,7 @@ namespace cocosocket4unity
 				 **/
 		public ByteBuf (int capacity)
 		{
-			this.len = capacity;
-			this.data = new byte[len];
+            this.data = new byte[capacity];
 			readerIndex = 0;
 			writerIndex = 0;
 			markReader = 0;
@@ -29,19 +27,22 @@ namespace cocosocket4unity
 		}
         public ByteBuf(byte[] content)
         {
-            this.len = content.Length;
             this.data = content;
             readerIndex = 0;
-            writerIndex = len;
+            writerIndex = content.Length;
             markReader = 0;
             markWriter = 0;
+        }
+        private ByteBuf()
+        {
+ 
         }
 		/**
 		 *  容量
 		 **/
 		public int Capacity ()
 		{
-			return len;
+			return data.Length;
 		}
 
 		/**
@@ -49,11 +50,11 @@ namespace cocosocket4unity
 		 */
 		public ByteBuf Capacity (int nc)
 		{
-			if (nc > len) {
+			if (nc > data.Length) 
+            {
 				byte[] old = data;
 				data = new byte[nc];
-				Array.Copy (old, data, len);
-				len = nc;
+				Array.Copy (old, data, data.Length);
 			}
 			return this;
 		}
@@ -75,20 +76,34 @@ namespace cocosocket4unity
 		 **/ 
 		public ByteBuf Copy()
 		{
-			ByteBuf item = new ByteBuf(len);
-			Array.Copy (this.data, item.data, len);
+			ByteBuf item = new ByteBuf(data.Length);
+			Array.Copy (this.data, item.data, data.Length);
 			item.readerIndex = readerIndex;
 			item.writerIndex = writerIndex;
 			item.markReader = markReader;
 			item.markWriter = markWriter;
 			return item;
 		}
+        /// <summary>
+        /// 浅拷贝
+        /// </summary>
+        /// <returns></returns>
+        public ByteBuf Duplicate()
+        {
+            ByteBuf item = new ByteBuf();
+            item.readerIndex = readerIndex;
+            item.writerIndex = writerIndex;
+            item.markReader = markReader;
+            item.markWriter = markWriter;
+            item.data = data;
+            return item;
+        }
 		/**
 		 * 获取一个字节
 		 **/ 
 		public byte GetByte(int index)
 		{
-			if (index < len)
+			if (index < data.Length)
 			{
 				return data[index];
 			}
@@ -99,7 +114,7 @@ namespace cocosocket4unity
 		 **/ 
 		public 	int GetInt(int index)
 		{
-			if (index + 3 < len)
+			if (index + 3 < data.Length)
 			{
 				int ret = ((int) data[index]) << 24;
 				ret |= ((int) data[index + 1]) << 16;
@@ -114,7 +129,7 @@ namespace cocosocket4unity
 		 **/ 
 		public short GetShort(int index)
 		{
-			if (index + 1 < len)
+			if (index + 1 < data.Length)
 			{
 				short r1 = (short)(data[index] << 8);
 				short r2 = (short)(data[index + 1]);
@@ -144,7 +159,7 @@ namespace cocosocket4unity
 		 **/ 
 		public int MaxWritableBytes()
 		{
-			return len - writerIndex;
+			return data.Length - writerIndex;
 		}
 		/**
 		 * 读取一个字节
@@ -165,14 +180,11 @@ namespace cocosocket4unity
 		{
 			if (readerIndex + 3 < writerIndex)
 			{
-				unchecked
-				{
 					int ret = (int)(((data [readerIndex++]) << 24) & 0xff000000);
 					ret |= (((data [readerIndex++]) << 16) & 0x00ff0000);
 					ret |= (((data [readerIndex++]) << 8) & 0x0000ff00);
 					ret |= (((data [readerIndex++])) & 0x000000ff);
 					return ret;
-				}
 			}
 			return 0;
 		}
@@ -242,7 +254,7 @@ namespace cocosocket4unity
 		 **/ 
 		public ByteBuf SetByte(int index, byte value)
 		{
-			if (index < len)
+			if (index < data.Length)
 			{
 				data[index] = value;
 			}
@@ -266,7 +278,7 @@ namespace cocosocket4unity
 		 **/ 
 		public ByteBuf SetIndex(int readerIndex, int writerIndex)
 		{
-			if (readerIndex >= 0 && readerIndex <= writerIndex && writerIndex <= len)
+			if (readerIndex >= 0 && readerIndex <= writerIndex && writerIndex <= data.Length)
 			{
 				this.readerIndex = readerIndex;
 				this.writerIndex = writerIndex;
@@ -278,7 +290,7 @@ namespace cocosocket4unity
 		 **/ 
 		public ByteBuf SetInt(int index, int value)
 		{
-			if (index + 4 <= len)
+			if (index + 4 <= data.Length)
 			{
 				data[index++] = (byte)((value >> 24) & 0xff);
 				data[index++] = (byte)((value >> 16) & 0xff);
@@ -292,7 +304,7 @@ namespace cocosocket4unity
 		 **/ 
 		public ByteBuf SetShort(int index, short value)
 		{
-			if (index + 2 <= len)
+			if (index + 2 <= data.Length)
 			{
 				data[index++] = (byte)((value >> 8) & 0xff);
 				data[index++] = (byte)(value & 0xff);
@@ -315,7 +327,7 @@ namespace cocosocket4unity
 		 **/ 
 		public int WritableBytes()
 		{
-			return len - writerIndex;
+			return data.Length - writerIndex;
 		}
 		/**
 		 * 写入一个字节
@@ -444,7 +456,7 @@ namespace cocosocket4unity
 		 **/ 
 		public ByteBuf WriterIndex(int writerIndex)
 		{
-			if (writerIndex >= readerIndex && writerIndex <= len)
+			if (writerIndex >= readerIndex && writerIndex <= data.Length)
 			{
 				this.writerIndex = writerIndex;
 			}
@@ -457,11 +469,6 @@ namespace cocosocket4unity
 		{
 			return data;
 		}
-
-
-
-
-
 
 
 	}

@@ -53,6 +53,7 @@
     <Compile Include="ProtoAttribute.cs" />
     <Compile Include="Protocal.cs" />
     <Compile Include="LVProtocal.cs" />
+    <Compile Include="TestKcp.cs" />
     <Compile Include="USocket.cs" />
     <Compile Include="SocketListner.cs" />
     <Compile Include="TestListner.cs" />

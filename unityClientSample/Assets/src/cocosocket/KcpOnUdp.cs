@@ -13,9 +13,7 @@ namespace cocosocket4unity
       protected Kcp kcp;
       protected IPEndPoint serverAddr;
       protected Object LOCK = new Object();//加锁访问收到的数据
-      protected Object SEND_LOCK = new Object();//加锁访问发送列表
-      protected LinkedList<ByteBuf> received;
-      protected LinkedList<ByteBuf> sendList;
+      protected LinkedList<byte[]> received;
       protected int nodelay;
       protected int interval = Kcp.IKCP_INTERVAL;
       protected int resend;
@@ -30,8 +28,7 @@ namespace cocosocket4unity
       {
               client = new UdpClient(port);
               kcp = new Kcp(121106, this, null);
-              this.received = new LinkedList<ByteBuf>();
-              this.sendList = new LinkedList<ByteBuf>();
+              this.received = new LinkedList<byte[]>();
       }
       /// <summary>
       /// 连接到地址
@@ -72,7 +69,7 @@ namespace cocosocket4unity
           byte[] data=client.EndReceive(ar, ref this.serverAddr);
           lock(LOCK)
           {
-            this.received.AddLast(new ByteBuf(data));
+            this.received.AddLast(data);
             this.needUpdate = true;
           }
             client.BeginReceive(Received, ar.AsyncState);
@@ -81,21 +78,12 @@ namespace cocosocket4unity
                this.HandleException(ex);
            }
       }
-        /// <summary>
-        /// 发送
-        /// </summary>
-        /// <param name="content"></param>
-      public void Send(ByteBuf content)
-      {
-          lock (this.SEND_LOCK)
-          {
-              this.sendList.AddLast(content);
-              this.needUpdate = true;
-          }
-      }
-/// <summary>
-/// 更新
-/// </summary>
+      /**
+  * update one kcp
+  *
+  * @param addr
+  * @param kcp
+  */
   public void Update()
   {
     //input
@@ -103,9 +91,14 @@ namespace cocosocket4unity
       {  
         while (this.received.Count>0)
         {
-        ByteBuf bb = this.received.First.Value;
-        kcp.Input(bb);
+        byte[] dp = this.received.First.Value;
+        int r=kcp.Input(new ByteBuf(dp));
         this.received.RemoveFirst();
+        if (r < 0)//error
+        {
+            this.HandleException(new Exception("kcp输入状态异常："+r));
+            return;
+        }
         }
       }
     //receive
@@ -120,16 +113,6 @@ namespace cocosocket4unity
         this.HandleReceive(bb);
       }
     }
-     //send
-    lock (this.SEND_LOCK)
-    {
-        while (this.sendList.Count > 0)
-        {
-            ByteBuf item = this.sendList.First.Value;
-            this.kcp.Send(item);
-            this.sendList.RemoveFirst();
-        }
-    }
     //update kcp status
     int cur = (int)DateTime.Now.Ticks;
     if (this.needUpdate|| cur >= kcp.GetNextUpdate())
@@ -142,8 +125,7 @@ namespace cocosocket4unity
     if (this.timeout > 0 && lastTime!=DateTime.MinValue)
     {
         double del=(DateTime.Now - this.lastTime).TotalMilliseconds;
-        if (del > this.timeout) 
-        { 
+        if (del > this.timeout) { 
         this.HandleTimeout();
         }
     }
@@ -201,20 +183,5 @@ namespace cocosocket4unity
       {
           this.mtu = mtu;
       }
-      public bool IsStream()
-      {
-          return this.kcp.IsStream();
-      }
-
-      public void SetStream(bool stream)
-      {
-          this.kcp.SetStream(stream);
-      }
-
-      public void SetMinRto(int min)
-      {
-          this.kcp.SetMinRto(min);
-      }
-
     }
 }
