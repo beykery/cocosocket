@@ -89,6 +89,17 @@ server部分是一个java程序，其底层依赖于netty，netty是一个真正
 于unity 3D网游。里面我嵌入了litjson的代码用并修复了它的一个bug：utf8字符串乱码
 ，如果你刚好需要json解析，那么建议使用，否则请删去litjson的代码即可。
 
+##关于kcp
+
+cocosocket4unity工程里面集成了一个kcp的c#实现，适用于moba类网游的开发，关于kcp
+更多的技术细节请参考
+[kcp](https://github.com/skywind3000/kcp)
+kcp的java版本，请参考
+[jkcp](https://github.com/beykery/jkcp)
+
+kcp是一种独立于底层通信协议的重传算法，而cocosocket4unity里面的c#实现和jkcp，
+不同于kcp的是直接构建在udp之上并提供完善的编程接口，用户不用关心udp和kcp的
+使用细节就能轻松驾驭moba类等需要高速传输环境的应用开发。
 
 ## 结语
 
