@@ -8,13 +8,30 @@ using System.Net;
 using protocol;
 //引用的
 using System.Reflection;
+using System.IO;
 namespace cocosocket4unity
 {
 	class MainClass
 	{
-		public static void Main1 (string[] args)
+		public static void Main(string[] args)
 		{
+
+            FightFBResultRequest request = new FightFBResultRequest();
+            request.starList = new List<int>();
+            request.starList.Add(1);
+            MemoryStream stream = new MemoryStream();
+            ProtoBuf.Serializer.NonGeneric.Serialize(stream, request);
+            byte[] bs = stream.ToArray();
+            try{
+                FileStream fsWrite = new FileStream("./request.data", FileMode.Create);
+                fsWrite.Write(bs, 0, bs.Length);
+            }catch(Exception ex)
+            {
+                Console.WriteLine("error.");
+            }
+           
             
+            /**
             AuthRequest ar = new AuthRequest();
             string json = JsonMapper.ToJson(ar);
             Console.WriteLine(ar.GetType().Name+":"+json);
@@ -31,6 +48,7 @@ namespace cocosocket4unity
               Console.WriteLine(arr.value);
             }
             Console.Read();
+             */ 
             
              /**
             long time_JAVA_Long = 1446050129676L;//java长整型日期，毫秒为单位             
@@ -41,6 +59,7 @@ namespace cocosocket4unity
             Console.WriteLine(string.Format("{0:G}", dt));
             Console.Read();
             */
+            /**
 			SocketListner listner = new TestListner ();
 			USocket us = new USocket ();
 			us.setLister (listner);
@@ -49,7 +68,7 @@ namespace cocosocket4unity
 			us.setProtocal (p);
 			us.Connect ("localhost", 4887);
 			Console.Read();
-             
+             */
 		}
 	}
 }

@@ -46,7 +46,7 @@ namespace cocosocket4unity
                   base.HandleTimeout();
               }
 
-		public static void Main(string[] args)
+		public static void Main1(string[] args)
 		{
 			KcpClient client = new TestKcp(2223);
 			client.NoDelay(1, 10, 2, 1);//fast

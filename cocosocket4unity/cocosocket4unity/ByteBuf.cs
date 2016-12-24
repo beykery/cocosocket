@@ -54,7 +54,7 @@ namespace cocosocket4unity
             {
 				byte[] old = data;
 				data = new byte[nc];
-				Array.Copy (old, data, data.Length);
+				Array.Copy (old, data, old.Length);
 			}
 			return this;
 		}
