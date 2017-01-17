@@ -26,6 +26,12 @@ namespace cocosocket4unity
       protected volatile bool needUpdate;
       protected long timeout;//超时
       protected DateTime lastTime;//上次检测时间
+        /// <summary>
+        /// 客户端
+        /// </summary>
+      public KcpOnUdp():this(0)
+      {
+      }
       public KcpOnUdp(int port)
       {
               client = new UdpClient(port);

@@ -13,10 +13,17 @@ namespace cocosocket4unity
 	public abstract class KcpClient : KcpOnUdp
     {
        protected volatile bool running;
+        /// <summary>
+        /// kcp，随机分配一个端口
+        /// </summary>
+       public KcpClient():base(0)
+       {
+       }
       /// <summary>
       /// 初始化kcp
       /// </summary>
       /// <param name="port">监听端口</param>
+      /// 
        public KcpClient(int port):base(port)
        {
        }

@@ -20,10 +20,6 @@ namespace cocosocket4unity
 {
 	public class TestKcp : KcpClient
 	{
-    public TestKcp(int port): base(port)
-    {
-        
-    }
         protected override void HandleReceive(ByteBuf bb)
         {
            string content= System.Text.Encoding.UTF8.GetString(bb.GetRaw());
@@ -46,16 +42,16 @@ namespace cocosocket4unity
                   base.HandleTimeout();
               }
 
-		public static void Main1(string[] args)
+		public static void Main(string[] args)
 		{
-			KcpClient client = new TestKcp(2223);
+			KcpClient client = new TestKcp();
 			client.NoDelay(1, 10, 2, 1);//fast
 			client.WndSize(64, 64);
 			client.Timeout(10*1000);
             client.SetMtu(512);
             client.SetMinRto(10);
-            client.Connect("119.29.153.92", 2222);
-            //client.Connect("127.0.0.1", 2222);
+            //client.Connect("119.29.153.92", 2222);
+            client.Connect("127.0.0.1", 2222);
 			client.Start();
 			Thread.Sleep(2000);
 			String s = "hi,heoll world! 你好啊！！";

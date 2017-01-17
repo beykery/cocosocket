@@ -1,0 +1,8 @@
+D:\work\git\cocosocket\cocosocket4unity\cocosocket4unity\bin\Debug\cocosocket4unity.exe
+D:\work\git\cocosocket\cocosocket4unity\cocosocket4unity\bin\Debug\cocosocket4unity.pdb
+D:\work\git\cocosocket\cocosocket4unity\cocosocket4unity\bin\Debug\protobuf-net.dll
+D:\work\git\cocosocket\cocosocket4unity\cocosocket4unity\bin\Debug\protobuf-net.pdb
+D:\work\git\cocosocket\cocosocket4unity\cocosocket4unity\bin\Debug\protobuf-net.xml
+D:\work\git\cocosocket\cocosocket4unity\cocosocket4unity\obj\x86\Debug\cocosocket4unity.exe
+D:\work\git\cocosocket\cocosocket4unity\cocosocket4unity\obj\x86\Debug\cocosocket4unity.pdb
+D:\work\git\cocosocket\cocosocket4unity\cocosocket4unity\obj\x86\Debug\cocosocket4unity.csprojResolveAssemblyReference.cache
