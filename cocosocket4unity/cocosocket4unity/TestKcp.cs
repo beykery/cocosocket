@@ -7,13 +7,6 @@ using System.Net.Sockets;
 using System.Net;
 using protocol;
 //引用的
-using System.Reflection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net.Sockets;
-using System.Net;
 using System.Threading;
 
 namespace cocosocket4unity
@@ -50,6 +43,7 @@ namespace cocosocket4unity
 			client.Timeout(10*1000);
             client.SetMtu(512);
             client.SetMinRto(10);
+            client.SetConv(121106);
             //client.Connect("119.29.153.92", 2222);
             client.Connect("127.0.0.1", 2222);
 			client.Start();

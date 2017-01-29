@@ -109,9 +109,11 @@ namespace cocosocket4unity
 			}
 			return (byte)0;
 		}
-		/**
-		 * 读取四字节整形F
-		 **/ 
+		/// <summary>
+        /// 读取四字节整形
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns></returns>
 		public 	int GetInt(int index)
 		{
 			if (index + 3 < data.Length)
@@ -124,6 +126,23 @@ namespace cocosocket4unity
 			}
 			return 0;
 		}
+        /// <summary>
+        /// 小头的读取
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public int GetIntLE(int index)
+        {
+            if (index + 3 < data.Length)
+            {
+                int ret = ((int)data[index]);
+                ret |= ((int)data[index + 1]) << 8;
+                ret |= ((int)data[index + 2]) << 16;
+                ret |= ((int)data[index + 3])<<24;
+                return ret;
+            }
+            return 0;
+        }
 		/**
 		 * 读取两字节整形
 		 **/ 
@@ -138,6 +157,22 @@ namespace cocosocket4unity
 			}
 			return 0;
 		}
+        /// <summary>
+        /// 读取两字节整形
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public short GetShortLE(int index)
+        {
+            if (index + 1 < data.Length)
+            {
+                short r1 = (short)(data[index]);
+                short r2 = (short)(data[index + 1]<<8);
+                short ret = (short)(r1 | r2);
+                return ret;
+            }
+            return 0;
+        }
 		/**
 		 * 标记读
 		 **/ 
@@ -188,9 +223,26 @@ namespace cocosocket4unity
 			}
 			return 0;
 		}
-		/**
-		 * 读取两个字节的整形
-		 **/ 
+        /// <summary>
+        /// 小头读取
+        /// </summary>
+        /// <returns></returns>
+        public int ReadIntLE()
+        {
+            if (readerIndex + 3 < writerIndex)
+            {
+                int ret = (((data[readerIndex++])) & 0x000000ff);
+                ret |= (((data[readerIndex++]) << 8) & 0x0000ff00);
+                ret |= (((data[readerIndex++]) << 16) & 0x00ff0000);
+                ret |= (int)(((data[readerIndex++]) <<24) & 0xff000000);
+                return ret;
+            }
+            return 0;
+        }
+		/// <summary>
+        /// 读取两个字节的整形
+		/// </summary>
+		/// <returns></returns>
 		public short ReadShort()
 		{
 			if (readerIndex + 1 < writerIndex)
@@ -202,9 +254,25 @@ namespace cocosocket4unity
 			}
 			return 0;
 		}
-		/**
-		 * 可读字节数
-		 **/ 
+        /// <summary>
+        /// 小头读取
+        /// </summary>
+        /// <returns></returns>
+        public short ReadShortLE()
+        {
+            if (readerIndex + 1 < writerIndex)
+            {
+                int l = data[readerIndex++];
+                int h = data[readerIndex++] & 0x000000ff;
+                int len = ((h << 8) & 0x0000ff00) | (l);
+                return (short)len;
+            }
+            return 0;
+        }
+		/// <summary>
+        /// 可读字节数
+		/// </summary>
+		/// <returns></returns>
 		public int ReadableBytes()
 		{
 			return writerIndex - readerIndex;
@@ -299,6 +367,23 @@ namespace cocosocket4unity
 			}
 			return this;
 		}
+        /// <summary>
+        /// 设置小头整形
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ByteBuf SetIntLE(int index, int value)
+        {
+            if (index + 4 <= data.Length)
+            {
+                data[index++] = (byte)(value & 0xff);
+                data[index++] = (byte)((value >> 8) & 0xff);
+                data[index++] = (byte)((value >> 16) & 0xff);
+                data[index++] = (byte)((value >> 24) & 0xff);
+            }
+            return this;
+        }
 		/**
 		 * 设置两字节整形
 		 **/ 
@@ -311,6 +396,21 @@ namespace cocosocket4unity
 			}
 			return this;
 		}
+        /// <summary>
+        /// 小头整形
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ByteBuf SetShortLE(int index, short value)
+        {
+            if (index + 2 <= data.Length)
+            {
+                data[index++] = (byte)(value & 0xff);
+                data[index++] = (byte)((value >> 8) & 0xff);
+            }
+            return this;
+        }
 		/**
 		 * 略过一些字节
 		 **/ 
@@ -351,6 +451,20 @@ namespace cocosocket4unity
 			data[writerIndex++] = (byte)(value & 0xff);
 			return this;
 		}
+        /// <summary>
+        /// 写入四字节小头
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ByteBuf WriteIntLE(int value)
+        {
+            Capacity(writerIndex + 4);
+            data[writerIndex++] = (byte)(value & 0xff);
+            data[writerIndex++] = (byte)((value >> 8) & 0xff);
+            data[writerIndex++] = (byte)((value >> 16) & 0xff);
+            data[writerIndex++] = (byte)((value >> 24) & 0xff);
+            return this;
+        }
 		/**
 		 * 写入两字节整形
 		 **/ 
@@ -361,6 +475,18 @@ namespace cocosocket4unity
 			data[writerIndex++] = (byte)(value & 0xff);
 			return this;
 		}
+        /// <summary>
+        /// 两字节小头
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ByteBuf WriteShortLE(short value)
+        {
+            Capacity(writerIndex + 2);
+            data[writerIndex++] = (byte)(value & 0xff);
+            data[writerIndex++] = (byte)((value >> 8) & 0xff);
+            return this;
+        }
 		/**
 		 * 写入一部分字节
 		 **/ 
@@ -419,7 +545,7 @@ namespace cocosocket4unity
 			return this;
 		}
 		/**
-		 * 读取utf字符串
+		 * 读取utf字符串（大头）
 		 **/ 
 		public string ReadUTF8()
 		{
@@ -429,7 +555,18 @@ namespace cocosocket4unity
 			readerIndex += len;
 			return Encoding.UTF8.GetString (charBuff);
 		}
-
+        /// <summary>
+        /// 读取utf8（小头）
+        /// </summary>
+        /// <returns></returns>
+        public string ReadUTF8LE()
+        {
+            short len = ReadShortLE(); // 字节数
+            byte[] charBuff = new byte[len]; //
+            Array.Copy(data, readerIndex, charBuff, 0, len);
+            readerIndex += len;
+            return Encoding.UTF8.GetString(charBuff);
+        }
 		/**
 		 * 写入utf字符串
 		 * 
@@ -444,6 +581,21 @@ namespace cocosocket4unity
 			writerIndex += len;
 			return this;
 		}
+        /// <summary>
+        /// 写入utf8（小头）
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ByteBuf WriteUTF8LE(string value)
+        {
+            byte[] content = Encoding.UTF8.GetBytes(value.ToCharArray());
+            int len = content.Length;
+            Capacity(writerIndex + len + 2);
+            WriteShortLE((short)len);
+            Array.Copy(content, 0, data, writerIndex, len);
+            writerIndex += len;
+            return this;
+        }
 		/**
 		 * 写指针
 		 **/

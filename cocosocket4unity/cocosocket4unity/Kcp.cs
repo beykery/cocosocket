@@ -128,14 +128,14 @@ public class Kcp
     public int Encode(ByteBuf buf)
     {
       int off = buf.WriterIndex();
-      buf.WriteInt(conv);
+      buf.WriteIntLE(conv);
       buf.WriteByte(cmd);
       buf.WriteByte((byte)frg);
-      buf.WriteShort((short)wnd);
-      buf.WriteInt(ts);
-      buf.WriteInt(sn);
-      buf.WriteInt(una);
-      buf.WriteInt(data == null ? 0 : data.ReadableBytes());
+      buf.WriteShortLE((short)wnd);
+      buf.WriteIntLE(ts);
+      buf.WriteIntLE(sn);
+      buf.WriteIntLE(una);
+      buf.WriteIntLE(data == null ? 0 : data.ReadableBytes());
       return buf.WriterIndex() - off;
     }
   }
@@ -519,18 +519,18 @@ public class Kcp
       {
         break;
       }
-      conv_ = data.ReadInt();
+      conv_ = data.ReadIntLE();
       if (this.conv != conv_)
       {
         return -1;
       }
       cmd = data.ReadByte();
       frg = data.ReadByte();
-      wnd = data.ReadShort();
-      ts = data.ReadInt();
-      sn = data.ReadInt();
-      una = data.ReadInt();
-      len = data.ReadInt();
+      wnd = data.ReadShortLE();
+      ts = data.ReadIntLE();
+      sn = data.ReadIntLE();
+      una = data.ReadIntLE();
+      len = data.ReadIntLE();
       if (data.ReadableBytes() < len)
       {
         return -2;
@@ -567,7 +567,6 @@ public class Kcp
           }
           break;
         case IKCP_CMD_PUSH:
-          Console.WriteLine(sn);
           if (_itimediff(sn, rcv_nxt + rcv_wnd) < 0)
           {
               Ack_push(sn, ts);
@@ -1079,7 +1078,10 @@ public class Kcp
   {
       rx_minrto = min;
   }
-
+  public void SetConv(int conv)
+  {
+      this.conv = conv;
+  }
 }
 
 }

@@ -21,8 +21,8 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-MacOSX
-CND_DLIB_EXT=dylib
+CND_PLATFORM=GNU-Linux
+CND_DLIB_EXT=so
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -72,57 +72,57 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cocosocket-client: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cocosocket-client ${OBJECTFILES} ${LDLIBSOPTIONS} -lpthread
 
-${OBJECTDIR}/ByteBuf.o: ByteBuf.cpp 
+${OBJECTDIR}/ByteBuf.o: ByteBuf.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ByteBuf.o ByteBuf.cpp
 
-${OBJECTDIR}/DefaultListerner.o: DefaultListerner.cpp 
+${OBJECTDIR}/DefaultListerner.o: DefaultListerner.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DefaultListerner.o DefaultListerner.cpp
 
-${OBJECTDIR}/Frame.o: Frame.cpp 
+${OBJECTDIR}/Frame.o: Frame.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Frame.o Frame.cpp
 
-${OBJECTDIR}/LVProtocal.o: LVProtocal.cpp 
+${OBJECTDIR}/LVProtocal.o: LVProtocal.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LVProtocal.o LVProtocal.cpp
 
-${OBJECTDIR}/Mutext.o: Mutext.cpp 
+${OBJECTDIR}/Mutext.o: Mutext.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Mutext.o Mutext.cpp
 
-${OBJECTDIR}/Socket.o: Socket.cpp 
+${OBJECTDIR}/Socket.o: Socket.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Socket.o Socket.cpp
 
-${OBJECTDIR}/SocketListerner.o: SocketListerner.cpp 
+${OBJECTDIR}/SocketListerner.o: SocketListerner.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketListerner.o SocketListerner.cpp
 
-${OBJECTDIR}/Thread.o: Thread.cpp 
+${OBJECTDIR}/Thread.o: Thread.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Thread.o Thread.cpp
 
-${OBJECTDIR}/ThreadPool.o: ThreadPool.cpp 
+${OBJECTDIR}/ThreadPool.o: ThreadPool.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ThreadPool.o ThreadPool.cpp
 
-${OBJECTDIR}/WorkThread.o: WorkThread.cpp 
+${OBJECTDIR}/WorkThread.o: WorkThread.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WorkThread.o WorkThread.cpp
 
-${OBJECTDIR}/main.o: main.cpp 
+${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
@@ -133,7 +133,6 @@ ${OBJECTDIR}/main.o: main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cocosocket-client
 
 # Subprojects
 .clean-subprojects:

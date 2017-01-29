@@ -221,6 +221,9 @@ namespace cocosocket4unity
       {
           this.kcp.SetMinRto(min);
       }
-
+      public void SetConv(int conv)
+      {
+          this.kcp.SetConv(conv);
+      }
     }
 }
