@@ -10,7 +10,7 @@ namespace cocosocket4unity
     public class USocket
     {
         private Socket clientSocket;
-        private SocketListner listner;
+        private SocketListener listener;
         private Protocol protocol;
         private string ip;
         private int port;
@@ -37,9 +37,9 @@ namespace cocosocket4unity
         /**
          * 构造
          */
-        public USocket(SocketListner listner, Protocol protocol)
+        public USocket(SocketListener listener, Protocol protocol)
         {
-            this.listner = listner;
+            this.listener = listener;
             this.protocol = protocol;
             buf = new ByteBuf(4096);
             //queue = new BlockingQueue<ByteBuf>(5000);
@@ -76,21 +76,21 @@ namespace cocosocket4unity
                 //Thread t = new Thread(new ThreadStart(send));//启动发送线程，同步发送
                 //t.IsBackground = true;
                 //t.Start();
-                this.listner.OnOpen(this);
+                this.listener.OnOpen(this);
             }
             else
             {
                 this.status = STATUS_CLOSED;
                 this.serverClose = false;
-                this.listner.OnClose(this, false);
+                this.listener.OnClose(this, false);
             }
         }
         /**
          * 装入一个监听器
          */
-        public void setLister(SocketListner listner)
+        public void setListener(SocketListener listener)
         {
-            this.listner = listner;
+            this.listener = listener;
         }
         /**
          * 装入一个协议解析器
@@ -151,14 +151,14 @@ namespace cocosocket4unity
                     clientSocket.Close();
                     this.status = STATUS_CLOSED;
                     this.serverClose = serverClose;
-                    this.listner.OnClose(this, this.serverClose);
+                    this.listener.OnClose(this, this.serverClose);
                 }
             }
             catch (Exception e)
             {
                 this.status = STATUS_CLOSED;
                 this.serverClose = serverClose;
-                this.listner.OnClose(this, this.serverClose);
+                this.listener.OnClose(this, this.serverClose);
             }
         }
         /**
@@ -214,7 +214,7 @@ namespace cocosocket4unity
                 catch (Exception e)
                 {
                     this.status = STATUS_CLOSED;
-                    this.listner.OnError(this, e.StackTrace + e.Message);
+                    this.listener.OnError(this, e.StackTrace + e.Message);
                     this.Close(true);
                 }
             }
@@ -237,7 +237,7 @@ namespace cocosocket4unity
                         ByteBuf frame = this.protocol.TranslateFrame(buf);
                         if (frame != null)
                         {
-                            this.listner.OnMessage(this, frame);
+                            this.listener.OnMessage(this, frame);
                         }
                         else
                         {

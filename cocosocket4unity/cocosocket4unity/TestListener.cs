@@ -7,9 +7,9 @@ using System.IO;
 using protocol;
 namespace cocosocket4unity
 {
-	public class TestListner : SocketListner
+	public class TestListener : SocketListener
 	{
-		public TestListner ()
+		public TestListener ()
 		{
 		}
 
