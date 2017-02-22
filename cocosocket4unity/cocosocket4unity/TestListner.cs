@@ -17,7 +17,7 @@ namespace cocosocket4unity
 		{
            
 			Console.WriteLine ("收到数据:");
-			bb.ReaderIndex (us.getProtocal().HeaderLen());
+			bb.ReaderIndex (us.getProtocol().HeaderLen());
 
             int cmd = bb.ReadShort();
             Type t=null;

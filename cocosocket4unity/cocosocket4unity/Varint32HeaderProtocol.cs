@@ -4,7 +4,7 @@
 using System;
 namespace cocosocket4unity
 {
-	public class Varint32HeaderProtocol : Protocal
+	public class Varint32HeaderProtocol : Protocol
 	{
 		
 		private  const int STATUS_HEADER = 0;//读头

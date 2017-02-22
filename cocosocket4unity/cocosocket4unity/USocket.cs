@@ -11,7 +11,7 @@ namespace cocosocket4unity
     {
         private Socket clientSocket;
         private SocketListner listner;
-        private Protocal protocal;
+        private Protocol protocol;
         private string ip;
         private int port;
         private int status;
@@ -37,10 +37,10 @@ namespace cocosocket4unity
         /**
          * 构造
          */
-        public USocket(SocketListner listner, Protocal protocal)
+        public USocket(SocketListner listner, Protocol protocol)
         {
             this.listner = listner;
-            this.protocal = protocal;
+            this.protocol = protocol;
             buf = new ByteBuf(4096);
             //queue = new BlockingQueue<ByteBuf>(5000);
         }
@@ -95,16 +95,16 @@ namespace cocosocket4unity
         /**
          * 装入一个协议解析器
          */
-        public void setProtocal(Protocal p)
+        public void setProtocol(Protocol p)
         {
-            this.protocal = p;
+            this.protocol = p;
         }
         /**
          * 协议
          */
-        public Protocal getProtocal()
+        public Protocol getProtocol()
         {
-            return this.protocal;
+            return this.protocol;
         }
         public int getStatus()
         {
@@ -234,7 +234,7 @@ namespace cocosocket4unity
                     buf.WriterIndex(len);
                     while (true)
                     {
-                        ByteBuf frame = this.protocal.TranslateFrame(buf);
+                        ByteBuf frame = this.protocol.TranslateFrame(buf);
                         if (frame != null)
                         {
                             this.listner.OnMessage(this, frame);
