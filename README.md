@@ -69,7 +69,7 @@ cocosocket还拥有关于锁、队列、同步队列、线程池的实现，这�
 5，连接服务器，需要指定服务器ip地址和端口，如果连接成功，则SocketListerner的
 OnOpen函数会被调用，如果失败OnClose将被调用。
 
-##关于cocosocket-server
+## 关于cocosocket-server
 
 server部分是一个java程序，其底层依赖于netty，netty是一个真正高性能的通信框架
 ，cocosocket-server隐藏了许多netty的复杂性（netty不仅仅用于tcp/ip协议的通信）
@@ -83,13 +83,13 @@ server部分是一个java程序，其底层依赖于netty，netty是一个真正
       <version>1.0.6</version>
   </dependency>
 ```
-##关于cocosocket4unity
+## 关于cocosocket4unity
 
 这个程序是为unity 3D准备的，api和c++版本的客户端很像，实现的是相同的功能，适用
 于unity 3D网游。里面我嵌入了litjson的代码用并修复了它的一个bug：utf8字符串乱码
 ，如果你刚好需要json解析，那么建议使用，否则请删去litjson的代码即可。
 
-##关于kcp
+## 关于kcp
 
 cocosocket4unity工程里面集成了一个kcp的c#实现，适用于moba类网游的开发，关于kcp
 更多的技术细节请参考
