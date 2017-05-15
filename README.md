@@ -80,7 +80,7 @@ server部分是一个java程序，其底层依赖于netty，netty是一个真正
   <dependency>
       <groupId>org.beykery</groupId>
       <artifactId>cocosocket</artifactId>
-      <version>1.0.6</version>
+      <version>1.1.1</version>
   </dependency>
 ```
 ##关于cocosocket4unity
