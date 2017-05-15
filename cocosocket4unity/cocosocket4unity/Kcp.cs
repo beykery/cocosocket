@@ -346,7 +346,7 @@ public class Kcp
         rx_srtt = 1;
       }
     }
-    int rto = rx_srtt + Math.Max(1, 4 * rx_rttval);
+    int rto = rx_srtt + Math.Max(interval, 4 * rx_rttval);
     rx_rto = _ibound_(rx_minrto, rto, IKCP_RTO_MAX);
   }
 
