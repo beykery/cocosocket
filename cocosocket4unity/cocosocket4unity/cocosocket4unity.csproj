@@ -51,8 +51,8 @@
     <Compile Include="Frame.cs" />
     <Compile Include="Output.cs" />
     <Compile Include="ProtoAttribute.cs" />
-    <Compile Include="Protocal.cs" />
-    <Compile Include="LVProtocal.cs" />
+    <Compile Include="Protocol.cs" />
+    <Compile Include="LVProtocol.cs" />
     <Compile Include="TestEnum.cs" />
     <Compile Include="TestKcp.cs" />
     <Compile Include="TestRequest.cs" />

@@ -2,7 +2,7 @@
 
 namespace cocosocket4unity
 {
-	public class LVProtocal : Protocal
+	public class LVProtocol : Protocol
 	{
 		private int status;
 		private int h;
@@ -10,7 +10,7 @@ namespace cocosocket4unity
 		private short len;
 		private ByteBuf frame;
 
-		public LVProtocal ()
+		public LVProtocol ()
 		{
 
 		}
